@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/notificationModel.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/notificationState.dart';
-import 'package:flutter_twitter_clone/ui/page/notification/widget/follow_notification_tile.dart';
-import 'package:flutter_twitter_clone/ui/page/notification/widget/post_like_tile.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/model/notificationModel.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/notificationState.dart';
+import 'package:routy/ui/page/notification/widget/follow_notification_tile.dart';
+import 'package:routy/ui/page/notification/widget/post_like_tile.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/emptyList.dart';
 import 'package:provider/provider.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -39,11 +39,11 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TwitterColor.mystic,
+      backgroundColor: RoutyColor.mystic,
       appBar: CustomAppBar(
         scaffoldKey: widget.scaffoldKey,
         title: customTitleText(
-          'Notifications',
+          'Bildirimler',
         ),
         icon: AppIcon.settings,
         onActionPressed: onSettingIconPressed,
@@ -64,7 +64,7 @@ class NotificationPageBody extends StatelessWidget {
       );
     }
     return FutureBuilder(
-      future: state.getTweetDetail(model.tweetKey),
+      future: state.getPostDetail(model.tweetKey),
       builder: (BuildContext context, AsyncSnapshot<FeedModel> snapshot) {
         if (snapshot.hasData) {
           return PostLikeTile(model: snapshot.data);

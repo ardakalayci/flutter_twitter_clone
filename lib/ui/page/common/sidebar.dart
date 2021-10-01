@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followerListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/qrCode/scanner.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:routy/helper/constant.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/page/profile/follow/followerListPage.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/profile/qrCode/scanner.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
 import 'package:provider/provider.dart';
 
 class SidebarMenu extends StatefulWidget {
@@ -73,7 +73,7 @@ class _SidebarMenuState extends State<SidebarMenu> {
                   state.userModel.isVerified ?? false
                       ? customIcon(context,
                           icon: AppIcon.blueTick,
-                          istwitterIcon: true,
+                          iscustomIcon: true,
                           iconColor: AppColor.primary,
                           size: 18,
                           paddingIcon: 3)
@@ -100,10 +100,10 @@ class _SidebarMenuState extends State<SidebarMenu> {
                     width: 17,
                   ),
                   _tappbleText(context, '${state.userModel.getFollower}',
-                      ' Followers', 'FollowerListPage'),
+                      ' Takipçiler', 'FollowerListPage'),
                   SizedBox(width: 10),
                   _tappbleText(context, '${state.userModel.getFollowing}',
-                      ' Following', 'FollowingListPage'),
+                      ' Takip Edilenler', 'FollowingListPage'),
                 ],
               ),
             ),
@@ -195,9 +195,9 @@ class _SidebarMenuState extends State<SidebarMenu> {
               ),
               customIcon(context,
                   icon: AppIcon.bulbOn,
-                  istwitterIcon: true,
+                  iscustomIcon: true,
                   size: 25,
-                  iconColor: TwitterColor.dodgetBlue),
+                  iconColor: RoutyColor.dodgetBlue),
               Spacer(),
               TextButton(
                 onPressed: () {
@@ -253,19 +253,19 @@ class _SidebarMenuState extends State<SidebarMenu> {
                     var state = context.read<AuthState>();
                     Navigator.push(
                         context, ProfilePage.getRoute(profileId: state.userId));
-                  }),
+                  }),/*
                   _menuListRowButton('Lists', icon: AppIcon.lists),
                   _menuListRowButton('Bookmark', icon: AppIcon.bookmark),
                   _menuListRowButton('Moments', icon: AppIcon.moments),
                   _menuListRowButton('Fwitter ads', icon: AppIcon.twitterAds),
-                  Divider(),
-                  _menuListRowButton('Settings and privacy', isEnable: true,
+                  Divider(),*/
+                  _menuListRowButton('Ayarlar', isEnable: true,
                       onPressed: () {
                     _navigateTo('SettingsAndPrivacyPage');
                   }),
-                  _menuListRowButton('Help Center'),
+                  //_menuListRowButton('Help Center'),
                   Divider(),
-                  _menuListRowButton('Logout',
+                  _menuListRowButton('Çıkış Yap',
                       icon: null, onPressed: _logOut, isEnable: true),
                 ],
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 import 'customWidgets.dart';
@@ -56,7 +56,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 const Radius.circular(25.0),
               ),
             ),
-            hintText: 'Search..',
+            hintText: 'Ara...',
             fillColor: AppColor.extraLightGrey,
             filled: true,
             focusColor: Colors.white,
@@ -99,7 +99,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   },
                   icon: customIcon(context,
                       icon: icon,
-                      istwitterIcon: true,
+                      iscustomIcon: true,
                       iconColor: AppColor.primary,
                       size: 25),
                 )

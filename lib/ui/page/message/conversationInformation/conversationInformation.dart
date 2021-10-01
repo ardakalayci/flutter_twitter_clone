@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/rippleButton.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/page/settings/widgets/headerWidget.dart';
+import 'package:routy/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:routy/state/chats/chatState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
+import 'package:routy/widgets/newWidget/rippleButton.dart';
 import 'package:provider/provider.dart';
 
 class ConversationInformation extends StatelessWidget {
@@ -51,7 +51,7 @@ class ConversationInformation extends StatelessWidget {
                   ? customIcon(
                       context,
                       icon: AppIcon.blueTick,
-                      istwitterIcon: true,
+                      iscustomIcon: true,
                       iconColor: AppColor.primary,
                       size: 18,
                       paddingIcon: 3,
@@ -75,7 +75,7 @@ class ConversationInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = Provider.of<ChatState>(context).chatUser ?? UserModel();
     return Scaffold(
-      backgroundColor: TwitterColor.white,
+      backgroundColor: RoutyColor.white,
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
@@ -92,17 +92,17 @@ class ConversationInformation extends StatelessWidget {
           ),
           Container(
             height: 15,
-            color: TwitterColor.mystic,
+            color: RoutyColor.mystic,
           ),
           SettingRowWidget(
             "Block ${user.userName}",
-            textColor: TwitterColor.dodgetBlue,
+            textColor: RoutyColor.dodgetBlue,
             showDivider: false,
           ),
           SettingRowWidget("Report ${user.userName}",
-              textColor: TwitterColor.dodgetBlue, showDivider: false),
+              textColor: RoutyColor.dodgetBlue, showDivider: false),
           SettingRowWidget("Delete conversation",
-              textColor: TwitterColor.ceriseRed, showDivider: false),
+              textColor: RoutyColor.ceriseRed, showDivider: false),
         ],
       ),
     );

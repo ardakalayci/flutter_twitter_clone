@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_link_preview/flutter_link_preview.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/ui/theme/theme.dart';
 
 class LinkPreview extends StatelessWidget {
   const LinkPreview({Key key, this.url, this.text}) : super(key: key);

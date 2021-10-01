@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customCheckBox.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/newWidget/customCheckBox.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
 
 class SettingRowWidget extends StatelessWidget {
   const SettingRowWidget(
@@ -51,7 +51,7 @@ class SettingRowWidget extends StatelessWidget {
                 : UrlText(
                     text: subtitle,
                     style: TextStyle(
-                        color: TwitterColor.paleSky,
+                        color: RoutyColor.paleSky,
                         fontWeight: FontWeight.w400),
                   ),
             trailing: CustomCheckBox(

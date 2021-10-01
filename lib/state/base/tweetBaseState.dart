@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:path/path.dart' as Path;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/state/appState.dart';
 
 class TweetBaseState extends AppState {
   /// get [Tweet Detail] from firebase realtime kDatabase
@@ -14,20 +14,20 @@ class TweetBaseState extends AppState {
   /// After getting tweet detail fetch tweet coments from firebase
   Future<FeedModel> getpostDetailFromDatabase(String postID) async {
     try {
-      FeedModel tweet;
+      FeedModel post;
 
-      // Fetch tweet data from firebase
+      // Fetch post data from firebase
       return await kDatabase
-          .child('tweet')
+          .child('post')
           .child(postID)
           .once()
           .then((DataSnapshot snapshot) {
         if (snapshot.value != null) {
           var map = snapshot.value;
-          tweet = FeedModel.fromJson(map);
-          tweet.key = snapshot.key;
+          post = FeedModel.fromJson(map);
+          post.key = snapshot.key;
         }
-        return tweet;
+        return post;
       });
     } catch (error) {
       cprint(error, errorIn: 'getpostDetailFromDatabase');
@@ -38,17 +38,17 @@ class TweetBaseState extends AppState {
   Future<List<FeedModel>> getTweetsComments(FeedModel post) async {
     List<FeedModel> _commentlist;
     // Check if parent tweet has reply tweets or not
-    if (post.replyTweetKeyList != null && post.replyTweetKeyList.length > 0) {
-      post.replyTweetKeyList.forEach((x) async {
+    if (post.replyPostKeyList != null && post.replyPostKeyList.length > 0) {
+      post.replyPostKeyList.forEach((x) async {
         if (x == null) {
           return;
         }
       });
       _commentlist = [];
-      for (var replyTweetId in post.replyTweetKeyList) {
+      for (var replyTweetId in post.replyPostKeyList) {
         if (replyTweetId != null) {
           await kDatabase
-              .child('tweet')
+              .child('post')
               .child(replyTweetId)
               .once()
               .then((DataSnapshot snapshot) {
@@ -63,7 +63,7 @@ class TweetBaseState extends AppState {
                 _commentlist.add(commentmodel);
               }
             } else {}
-            if (replyTweetId == post.replyTweetKeyList.last) {
+            if (replyTweetId == post.replyPostKeyList.last) {
               /// Sort comment by time
               /// It helps to display newest Tweet first.
               _commentlist.sort((x, y) => DateTime.parse(y.createdAt)
@@ -79,20 +79,20 @@ class TweetBaseState extends AppState {
   /// [Delete tweet] in Firebase kDatabase
   /// Remove Tweet if present in home page Tweet list
   /// Remove Tweet if present in Tweet detail page or in comment
-  bool deleteTweet(String tweetId, TweetType type, {String parentkey}) {
+  bool deleteTweet(String tweetId, PostType type, {String parentkey}) {
     try {
       /// Delete tweet if it is in nested tweet detail page
-      kDatabase.child('tweet').child(tweetId).remove();
+      kDatabase.child('post').child(tweetId).remove();
       return true;
     } catch (error) {
-      cprint(error, errorIn: 'deleteTweet');
+      cprint(error, errorIn: 'deletePost');
       return false;
     }
   }
 
   /// [update] tweet
   void updateTweet(FeedModel model) async {
-    await kDatabase.child('tweet').child(model.key).set(model.toJson());
+    await kDatabase.child('post').child(model.key).set(model.toJson());
   }
 
   /// Add/Remove like on a Tweet
@@ -115,7 +115,7 @@ class TweetBaseState extends AppState {
       }
       // update likelist of a tweet
       kDatabase
-          .child('tweet')
+          .child('post')
           .child(tweet.key)
           .child('likeList')
           .set(tweet.likeList);
@@ -131,7 +131,7 @@ class TweetBaseState extends AppState {
             : DateTime.now().toUtc().toString(),
       });
     } catch (error) {
-      cprint(error, errorIn: 'addLikeToTweet');
+      cprint(error, errorIn: 'addLikeToPost');
     }
   }
 
@@ -139,7 +139,7 @@ class TweetBaseState extends AppState {
   /// Returns new tweet id
   String createPost(FeedModel tweet) {
     var json = tweet.toJson();
-    var refence = kDatabase.child('tweet').push();
+    var refence = kDatabase.child('post').push();
     refence.set(json);
     return refence.key;
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/ui/theme/theme.dart';
 
 class TabIndicator extends Decoration {
   final BoxPainter _painter;
@@ -22,7 +22,7 @@ class _TabPainter extends BoxPainter {
         offset + Offset(cfg.size.width * 3, cfg.size.height + 1);
 
     var blueLinePaint = Paint()
-      ..color = TwitterColor.dodgetBlue
+      ..color = RoutyColor.dodgetBlue
       ..strokeWidth = 2;
     var greyLinePaint = Paint()
       ..color = AppColor.lightGrey

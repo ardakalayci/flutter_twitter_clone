@@ -14,7 +14,7 @@ import 'appState.dart';
 
 class NotificationState extends AppState {
   String fcmToken;
-  FeedModel notificationTweetModel;
+  FeedModel notificationPostModel;
 
   // FcmNotificationModel notification;
   String notificationSenderId;
@@ -88,14 +88,14 @@ class NotificationState extends AppState {
   }
 
   /// get `Tweet` present in notification
-  Future<FeedModel> getTweetDetail(String tweetId) async {
-    FeedModel _tweetDetail;
-    var snapshot = await kDatabase.child('tweet').child(tweetId).once();
+  Future<FeedModel> getPostDetail(String postId) async {
+    FeedModel _postDetail;
+    var snapshot = await kDatabase.child('post').child(postId).once();
     if (snapshot.value != null) {
       var map = snapshot.value as Map<dynamic, dynamic>;
-      _tweetDetail = FeedModel.fromJson(map);
-      _tweetDetail.key = snapshot.key;
-      return _tweetDetail;
+      _postDetail = FeedModel.fromJson(map);
+      _postDetail.key = snapshot.key;
+      return _postDetail;
     } else {
       return null;
     }

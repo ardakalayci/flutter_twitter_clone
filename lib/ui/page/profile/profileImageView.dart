@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/customRoute.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/helper/customRoute.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
 
 class ProfileImageView extends StatelessWidget {
   const ProfileImageView({Key key, this.avatar}) : super(key: key);
@@ -26,7 +26,7 @@ class ProfileImageView extends StatelessWidget {
     ];
     // var authstate = Provider.of<AuthState>(context, listen: false);
     return Scaffold(
-      backgroundColor: TwitterColor.white,
+      backgroundColor: RoutyColor.white,
       appBar: AppBar(
         actions: <Widget>[
           PopupMenuButton<Choice>(

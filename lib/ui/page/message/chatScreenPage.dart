@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/chatModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/chatModel.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/chats/chatState.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreenPage extends StatefulWidget {
@@ -109,20 +109,20 @@ class _ChatScreenPageState extends State<ChatScreenPage> {
                       decoration: BoxDecoration(
                         borderRadius: getBorder(myMessage),
                         color: myMessage
-                            ? TwitterColor.dodgetBlue
-                            : TwitterColor.mystic,
+                            ? RoutyColor.dodgetBlue
+                            : RoutyColor.mystic,
                       ),
                       child: UrlText(
                         text: chat.message,
                         style: TextStyle(
                           fontSize: 16,
-                          color: myMessage ? TwitterColor.white : Colors.black,
+                          color: myMessage ? RoutyColor.white : Colors.black,
                         ),
                         urlStyle: TextStyle(
                           fontSize: 16,
                           color: myMessage
-                              ? TwitterColor.white
-                              : TwitterColor.dodgetBlue,
+                              ? RoutyColor.white
+                              : RoutyColor.dodgetBlue,
                           decoration: TextDecoration.underline,
                         ),
                       ),

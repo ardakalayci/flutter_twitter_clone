@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/common/usersListPage.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/ui/page/common/usersListPage.dart';
+import 'package:routy/ui/theme/theme.dart';
 
 class FollowerListPage extends StatelessWidget {
   FollowerListPage({Key key, this.userList, this.profile}) : super(key: key);
@@ -23,12 +23,12 @@ class FollowerListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UsersListPage(
-      pageTitle: 'Followers',
+      pageTitle: 'Takipçiler',
       userIdsList: userList,
       appBarIcon: AppIcon.follow,
-      emptyScreenText: '${profile?.userName} doesn\'t have any followers',
+      emptyScreenText: '${profile?.userName} henüz takipçisi yok',
       emptyScreenSubTileText:
-          'When someone follow them, they\'ll be listed here.',
+          'Takip et sen görün',
     );
   }
 }

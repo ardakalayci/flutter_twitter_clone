@@ -1,6 +1,6 @@
 part of '../theme.dart';
 
-class TwitterColor {
+class RoutyColor {
   static final Color bondiBlue = Color.fromRGBO(0, 132, 180, 1.0);
   static final Color cerulean = Color.fromRGBO(0, 172, 237, 1.0);
   static final Color spindle = Color.fromRGBO(192, 222, 237, 1.0);
@@ -17,7 +17,7 @@ class TwitterColor {
 }
 
 class AppColor {
-  static final Color primary = Color(0xff1DA1F2);
+  static final Color primary = Colors.deepOrange;
   static final Color secondary = Color(0xff14171A);
   static final Color darkGrey = Color(0xff1657786);
   static final Color lightGrey = Color(0xffAAB8C2);

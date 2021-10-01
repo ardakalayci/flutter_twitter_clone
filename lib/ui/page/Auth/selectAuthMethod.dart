@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/signup.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customFlatButton.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/ui/page/Auth/sign_screen.dart';
+import 'package:routy/ui/page/Auth/signup.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customFlatButton.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 import '../homePage.dart';
 import 'signin.dart';
@@ -22,7 +23,7 @@ class _WelcomePageState extends State<WelcomePage> {
       margin: EdgeInsets.symmetric(vertical: 15),
       width: MediaQuery.of(context).size.width,
       child: CustomFlatButton(
-        label: "Create Account",
+        label: "Hesap Oluştur",
         onPressed: () {
           var state = Provider.of<AuthState>(context, listen: false);
           Navigator.push(
@@ -53,7 +54,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             Spacer(),
             TitleText(
-              'See what\'s happening in the world right now.',
+              'Dünyamıza hoşgeldin, içeride neler var merak etmiyormusun?',
               fontSize: 25,
             ),
             SizedBox(
@@ -66,8 +67,8 @@ class _WelcomePageState extends State<WelcomePage> {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: <Widget>[
                 TitleText(
-                  'Have an account already?',
-                  fontSize: 14,
+                  'Hesabınız mı var?',
+                  fontSize: 15,
                   fontWeight: FontWeight.w300,
                 ),
                 InkWell(
@@ -77,16 +78,16 @@ class _WelcomePageState extends State<WelcomePage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            SignIn(loginCallback: state.getCurrentUser),
+                            FormLogin(loginCallback: state.getCurrentUser),
                       ),
                     );
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 2, vertical: 10),
                     child: TitleText(
-                      ' Log in',
-                      fontSize: 14,
-                      color: TwitterColor.dodgetBlue,
+                      ' Giriş Yap',
+                      fontSize: 15,
+                      color: Colors.deepOrange,
                       fontWeight: FontWeight.w300,
                     ),
                   ),

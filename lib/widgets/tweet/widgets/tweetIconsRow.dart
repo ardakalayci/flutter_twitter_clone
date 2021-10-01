@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/customRoute.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/page/common/usersListPage.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetBottomSheet.dart';
+import 'package:routy/helper/customRoute.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/ui/page/common/usersListPage.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/tweet/widgets/tweetBottomSheet.dart';
 import 'package:provider/provider.dart';
 
 class TweetIconsRow extends StatelessWidget {
@@ -17,7 +17,7 @@ class TweetIconsRow extends StatelessWidget {
   final Color iconEnableColor;
   final double size;
   final bool isTweetDetail;
-  final TweetType type;
+  final PostType type;
   final GlobalKey<ScaffoldState> scaffoldKey;
   const TweetIconsRow(
       {Key key,
@@ -50,16 +50,16 @@ class TweetIconsRow extends StatelessWidget {
             size: size ?? 20,
             onPressed: () {
               var state = Provider.of<FeedState>(context, listen: false);
-              state.setTweetToReply = model;
+              state.setPostToReply = model;
               Navigator.of(context).pushNamed('/ComposeTweetPage');
             },
           ),
           _iconWidget(context,
-              text: isTweetDetail ? '' : model.retweetCount.toString(),
+              text: isTweetDetail ? '' : model.repostCount.toString(),
               icon: AppIcon.retweet,
               iconColor: iconColor,
               size: size ?? 20, onPressed: () {
-            TweetBottomSheet().openRetweetbottomSheet(context,
+            PostBottomSheet().openRetweetbottomSheet(context,
                 type: type, model: model, scaffoldKey: scaffoldKey);
           }),
           _iconWidget(
@@ -107,7 +107,7 @@ class TweetIconsRow extends StatelessWidget {
                       context,
                       size: size,
                       icon: icon,
-                      istwitterIcon: true,
+                      iscustomIcon: true,
                       iconColor: iconColor,
                     ),
             ),
@@ -136,7 +136,7 @@ class TweetIconsRow extends StatelessWidget {
             customText(Utility.getPostTime2(model.createdAt),
                 style: TextStyles.textStyle14),
             SizedBox(width: 10),
-            customText('Fwitter for Android',
+            customText('Routy for Android',
                 style: TextStyle(color: Theme.of(context).primaryColor))
           ],
         ),
@@ -148,7 +148,7 @@ class TweetIconsRow extends StatelessWidget {
   Widget _likeCommentWidget(BuildContext context) {
     bool isLikeAvailable =
         model.likeCount != null ? model.likeCount > 0 : false;
-    bool isRetweetAvailable = model.retweetCount > 0;
+    bool isRetweetAvailable = model.repostCount > 0;
     bool isLikeRetweetAvailable = isRetweetAvailable || isLikeAvailable;
     return Column(
       children: <Widget>[
@@ -168,7 +168,7 @@ class TweetIconsRow extends StatelessWidget {
                   children: <Widget>[
                     !isRetweetAvailable
                         ? SizedBox.shrink()
-                        : customText(model.retweetCount.toString(),
+                        : customText(model.repostCount.toString(),
                             style: TextStyle(fontWeight: FontWeight.bold)),
                     !isRetweetAvailable
                         ? SizedBox.shrink()
@@ -254,7 +254,7 @@ class TweetIconsRow extends StatelessWidget {
   }
 
   void shareTweet(BuildContext context) async {
-    TweetBottomSheet().openShareTweetBottomSheet(context, model, type);
+    PostBottomSheet().openShareTweetBottomSheet(context, model, type);
   }
 
   @override

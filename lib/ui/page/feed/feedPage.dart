@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/tweet.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetBottomSheet.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/customLoader.dart';
+import 'package:routy/widgets/newWidget/emptyList.dart';
+import 'package:routy/widgets/tweet/tweet.dart';
+import 'package:routy/widgets/tweet/widgets/tweetBottomSheet.dart';
 import 'package:provider/provider.dart';
 
 class FeedPage extends StatelessWidget {
@@ -21,13 +21,14 @@ class FeedPage extends StatelessWidget {
 
   Widget _floatingActionButton(BuildContext context) {
     return FloatingActionButton(
+      backgroundColor: Colors.deepOrangeAccent,
       onPressed: () {
-        Navigator.of(context).pushNamed('/CreateFeedPage/tweet');
+        Navigator.of(context).pushNamed('/CreateFeedPage/post');
       },
       child: customIcon(
         context,
-        icon: AppIcon.fabTweet,
-        istwitterIcon: true,
+        icon: Icons.alt_route,
+        iscustomIcon: false,
         iconColor: Theme.of(context).colorScheme.onPrimary,
         size: 25,
       ),
@@ -38,7 +39,7 @@ class FeedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _floatingActionButton(context),
-      backgroundColor: TwitterColor.mystic,
+      backgroundColor: RoutyColor.mystic,
       body: SafeArea(
         child: Container(
           height: context.height,
@@ -104,12 +105,12 @@ class _FeedPageBody extends StatelessWidget {
                             (model) {
                               return Container(
                                 color: Colors.white,
-                                child: Tweet(
+                                child: Post(
                                   model: model,
-                                  trailing: TweetBottomSheet().tweetOptionIcon(
+                                  trailing: PostBottomSheet().tweetOptionIcon(
                                       context,
                                       model: model,
-                                      type: TweetType.Tweet,
+                                      type: PostType.Post,
                                       scaffoldKey: scaffoldKey),
                                 ),
                               );

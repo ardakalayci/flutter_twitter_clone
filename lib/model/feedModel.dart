@@ -1,4 +1,4 @@
-import 'package:flutter_twitter_clone/model/user.dart';
+import 'package:routy/model/user.dart';
 
 class FeedModel {
   String key;
@@ -7,13 +7,15 @@ class FeedModel {
   String description;
   String userId;
   int likeCount;
+  bool is_route;
   List<String> likeList;
   int commentCount;
-  int retweetCount;
+  List route_map;
+  int repostCount;
   String createdAt;
   String imagePath;
   List<String> tags;
-  List<String> replyTweetKeyList;
+  List<String> replyPostKeyList;
   UserModel user;
   FeedModel(
       {this.key,
@@ -21,13 +23,15 @@ class FeedModel {
       this.userId,
       this.likeCount,
       this.commentCount,
-      this.retweetCount,
+      this.repostCount,
       this.createdAt,
       this.imagePath,
       this.likeList,
+      this.route_map,
+      this.is_route,
       this.tags,
       this.user,
-      this.replyTweetKeyList,
+      this.replyPostKeyList,
       this.parentkey,
       this.childRetwetkey});
   toJson() {
@@ -36,12 +40,14 @@ class FeedModel {
       "description": description,
       "likeCount": likeCount,
       "commentCount": commentCount ?? 0,
-      "retweetCount": retweetCount ?? 0,
+      "repostCount": repostCount ?? 0,
       "createdAt": createdAt,
       "imagePath": imagePath,
       "likeList": likeList,
       "tags": tags,
-      "replyTweetKeyList": replyTweetKeyList,
+      "is_route":is_route,
+      "route_map":route_map,
+      "replyPostKeyList": replyPostKeyList,
       "user": user == null ? null : user.toJson(),
       "parentkey": parentkey,
       "childRetwetkey": childRetwetkey
@@ -56,9 +62,11 @@ class FeedModel {
     //  profilePic = map['profilePic'];
     likeCount = map['likeCount'] ?? 0;
     commentCount = map['commentCount'];
-    retweetCount = map["retweetCount"] ?? 0;
+    repostCount = map["repostCount"] ?? 0;
     imagePath = map['imagePath'];
     createdAt = map['createdAt'];
+    is_route = map['is_route']==null?false:map['is_route'];
+    route_map = map['route_map']==null?null:map['route_map'];
     imagePath = map['imagePath'];
     //  username = map['username'];
     user = UserModel.fromJson(map['user']);
@@ -99,35 +107,35 @@ class FeedModel {
       likeList = [];
       likeCount = 0;
     }
-    if (map['replyTweetKeyList'] != null) {
-      map['replyTweetKeyList'].forEach((value) {
-        replyTweetKeyList = <String>[];
-        map['replyTweetKeyList'].forEach((value) {
-          replyTweetKeyList.add(value);
+    if (map['replyPostKeyList'] != null) {
+      map['replyPostKeyList'].forEach((value) {
+        replyPostKeyList = <String>[];
+        map['replyPostKeyList'].forEach((value) {
+          replyPostKeyList.add(value);
         });
       });
-      commentCount = replyTweetKeyList.length;
+      commentCount = replyPostKeyList.length;
     } else {
-      replyTweetKeyList = [];
+      replyPostKeyList = [];
       commentCount = 0;
     }
   }
 
-  bool get isValidTweet {
+  bool get isValidPost {
     bool isValid = false;
     if (this.user != null &&
         this.user.userName != null &&
         this.user.userName.isNotEmpty) {
       isValid = true;
     } else {
-      print("Invalid Tweet found. Id:- $key");
+      print("Invalid Post found. Id:- $key");
     }
     return isValid;
   }
 
   /// get tweet key to retweet.
   ///
-  /// If tweet [TweetType] is [TweetType.Retweet] and its description is null
+  /// If tweet [TweetType] is [TweetType.Repost] and its description is null
   /// then its retweeted child tweet will be shared.
   String get getTweetKeyToRetweet {
     if (this.description == null &&

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
 
 class HeaderWidget extends StatelessWidget {
   final String title;
@@ -14,7 +14,7 @@ class HeaderWidget extends StatelessWidget {
       padding: secondHeader
           ? EdgeInsets.only(left: 18, right: 18, bottom: 10, top: 35)
           : EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-      color: TwitterColor.mystic,
+      color: RoutyColor.mystic,
       alignment: Alignment.centerLeft,
       child: UrlText(
         text: title ?? '',

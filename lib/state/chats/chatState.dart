@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
+import 'package:routy/helper/enum.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_twitter_clone/model/chatModel.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
+import 'package:routy/model/chatModel.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/appState.dart';
 
 class ChatState extends AppState {
   bool setIsChatScreenOpen;
@@ -67,20 +67,6 @@ class ChatState extends AppState {
     }
   }
 
-  /// Fecth FCM server key from firebase Remote config
-  /// FCM server key is stored in firebase remote config
-  /// you have to add server key in firebase remote config
-  /// To fetch this key go to project setting in firebase
-  /// Click on `cloud messaging` tab
-  /// Copy server key from `Project credentials`
-  /// Now goto `Remote Congig` section in fireabse
-  /// Add [FcmServerKey]  as paramerter key and below json in Default vslue
-  ///  ``` json
-  ///  {
-  ///    "key": "FCM server key here"
-  ///  } ```
-  /// For more detail visit:- https://github.com/TheAlphamerc/flutter_twitter_clone/issues/28#issue-611695533
-  /// For package detail check:-  https://pub.dev/packages/firebase_remote_config#-readme-tab-
   void getFCMServerKey() async {
     final RemoteConfig remoteConfig = await RemoteConfig.instance;
     await remoteConfig.fetchAndActivate();

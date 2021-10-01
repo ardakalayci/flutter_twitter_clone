@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/firebase_database.dart' as dabase;
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/appState.dart';
 import 'package:path/path.dart' as Path;
 // import 'authState.dart';
 
@@ -16,7 +16,7 @@ class FeedState extends AppState {
   Map<String, List<FeedModel>> tweetReplyMap = {};
   FeedModel _tweetToReplyModel;
   FeedModel get tweetToReplyModel => _tweetToReplyModel;
-  set setTweetToReply(FeedModel model) {
+  set setPostToReply(FeedModel model) {
     _tweetToReplyModel = model;
   }
 
@@ -85,7 +85,7 @@ class FeedState extends AppState {
     if (_tweetDetailModelList.length >= 0) {
       _tweetDetailModelList.add(model);
       cprint(
-          "Detail Tweet added. Total Tweet: ${_tweetDetailModelList.length}");
+          "Detail Post added. Total post: ${_tweetDetailModelList.length}");
       notifyListeners();
     }
   }
@@ -141,7 +141,7 @@ class FeedState extends AppState {
       isBusy = true;
       _feedlist = null;
       notifyListeners();
-      kDatabase.child('tweet').once().then((DataSnapshot snapshot) {
+      kDatabase.child('post').once().then((DataSnapshot snapshot) {
         _feedlist = <FeedModel>[];
         if (snapshot.value != null) {
           var map = snapshot.value;
@@ -149,7 +149,7 @@ class FeedState extends AppState {
             map.forEach((key, value) {
               var model = FeedModel.fromJson(value);
               model.key = key;
-              if (model.isValidTweet) {
+              if (model.isValidPost) {
                 _feedlist.add(model);
               }
             });
@@ -187,7 +187,7 @@ class FeedState extends AppState {
       } else {
         // Fetch tweet data from firebase
         kDatabase
-            .child('tweet')
+            .child('post')
             .child(postID)
             .once()
             .then((DataSnapshot snapshot) {
@@ -204,14 +204,14 @@ class FeedState extends AppState {
         // Fetch comment tweets
         _commentlist = <FeedModel>[];
         // Check if parent tweet has reply tweets or not
-        if (_tweetDetail.replyTweetKeyList != null &&
-            _tweetDetail.replyTweetKeyList.length > 0) {
-          _tweetDetail.replyTweetKeyList.forEach((x) {
+        if (_tweetDetail.replyPostKeyList != null &&
+            _tweetDetail.replyPostKeyList.length > 0) {
+          _tweetDetail.replyPostKeyList.forEach((x) {
             if (x == null) {
               return;
             }
             kDatabase
-                .child('tweet')
+                .child('post')
                 .child(x)
                 .once()
                 .then((DataSnapshot snapshot) {
@@ -226,7 +226,7 @@ class FeedState extends AppState {
                   _commentlist.add(commentmodel);
                 }
               } else {}
-              if (x == _tweetDetail.replyTweetKeyList.last) {
+              if (x == _tweetDetail.replyPostKeyList.last) {
                 /// Sort comment by time
                 /// It helps to display newest Tweet first.
                 _commentlist.sort((x, y) => DateTime.parse(y.createdAt)
@@ -259,7 +259,7 @@ class FeedState extends AppState {
     /// If tweet is not available in feedlist then need to fetch it from firebase
     else {
       cprint("Fetched from DB: " + postID);
-      var model = await kDatabase.child('tweet').child(postID).once().then(
+      var model = await kDatabase.child('post').child(postID).once().then(
         (DataSnapshot snapshot) {
           if (snapshot.value != null) {
             var map = snapshot.value;
@@ -286,13 +286,13 @@ class FeedState extends AppState {
     notifyListeners();
     String tweetKey;
     try {
-      DatabaseReference dbReference = kDatabase.child('tweet').push();
+      DatabaseReference dbReference = kDatabase.child('post').push();
 
       await dbReference.set(model.toJson());
 
       tweetKey = dbReference.key;
     } catch (error) {
-      cprint(error, errorIn: 'createTweet');
+      cprint(error, errorIn: 'createPost');
     }
     isBusy = false;
     notifyListeners();
@@ -306,14 +306,14 @@ class FeedState extends AppState {
     try {
       tweetKey = await createTweet(model);
       if (_tweetToReplyModel != null) {
-        if (_tweetToReplyModel.retweetCount == null) {
-          _tweetToReplyModel.retweetCount = 0;
+        if (_tweetToReplyModel.repostCount == null) {
+          _tweetToReplyModel.repostCount = 0;
         }
-        _tweetToReplyModel.retweetCount += 1;
+        _tweetToReplyModel.repostCount += 1;
         updateTweet(_tweetToReplyModel);
       }
     } catch (error) {
-      cprint(error, errorIn: 'createReTweet');
+      cprint(error, errorIn: 'createRePost');
     }
     return tweetKey;
   }
@@ -321,11 +321,11 @@ class FeedState extends AppState {
   /// [Delete tweet] in Firebase kDatabase
   /// Remove Tweet if present in home page Tweet list
   /// Remove Tweet if present in Tweet detail page or in comment
-  deleteTweet(String tweetId, TweetType type, {String parentkey}) {
+  deleteTweet(String tweetId, PostType type, {String parentkey}) {
     try {
       /// Delete tweet if it is in nested tweet detail page
-      kDatabase.child('tweet').child(tweetId).remove().then((_) {
-        if (type == TweetType.Detail &&
+      kDatabase.child('post').child(tweetId).remove().then((_) {
+        if (type == PostType.Detail &&
             _tweetDetailModelList != null &&
             _tweetDetailModelList.length > 0) {
           // var deletedTweet =
@@ -335,11 +335,11 @@ class FeedState extends AppState {
             _tweetDetailModelList = null;
           }
 
-          cprint('Tweet deleted from nested tweet detail page tweet');
+          cprint('Post deleted from nested tweet detail page post');
         }
       });
     } catch (error) {
-      cprint(error, errorIn: 'deleteTweet');
+      cprint(error, errorIn: 'deletePost');
     }
   }
 
@@ -371,7 +371,7 @@ class FeedState extends AppState {
       var filePath = url.split(".com/o/")[1];
       filePath = filePath.replaceAll(new RegExp(r'%2F'), '/');
       filePath = filePath.replaceAll(new RegExp(r'(\?alt).*'), '');
-      //  filePath = filePath.replaceAll('tweetImage/', '');
+      //  filePath = filePath.replaceAll('postImage/', '');
       cprint('[Path]' + filePath);
       var storageReference = FirebaseStorage.instance.ref();
       await storageReference.child(filePath).delete().catchError((val) {
@@ -386,7 +386,7 @@ class FeedState extends AppState {
 
   /// [update] tweet
   updateTweet(FeedModel model) async {
-    await kDatabase.child('tweet').child(model.key).set(model.toJson());
+    await kDatabase.child('post').child(model.key).set(model.toJson());
   }
 
   /// Add/Remove like on a Tweet
@@ -409,7 +409,7 @@ class FeedState extends AppState {
       }
       // update likelist of a tweet
       kDatabase
-          .child('tweet')
+          .child('post')
           .child(tweet.key)
           .child('likeList')
           .set(tweet.likeList);
@@ -425,7 +425,7 @@ class FeedState extends AppState {
             : DateTime.now().toUtc().toString(),
       });
     } catch (error) {
-      cprint(error, errorIn: 'addLikeToTweet');
+      cprint(error, errorIn: 'addLikeToPost');
     }
   }
 
@@ -440,9 +440,9 @@ class FeedState extends AppState {
         FeedModel tweet =
             _feedlist.firstWhere((x) => x.key == _tweetToReplyModel.key);
         var json = replyTweet.toJson();
-        DatabaseReference ref = kDatabase.child('tweet').push();
+        DatabaseReference ref = kDatabase.child('post').push();
         await ref.set(json);
-        tweet.replyTweetKeyList.add(ref.key);
+        tweet.replyPostKeyList.add(ref.key);
         updateTweet(tweet);
       }
     } catch (error) {
@@ -488,7 +488,7 @@ class FeedState extends AppState {
       }
     }
     if (event.snapshot != null) {
-      cprint('Tweet updated');
+      cprint('Post updated');
       isBusy = false;
       notifyListeners();
     }
@@ -508,9 +508,9 @@ class FeedState extends AppState {
       _feedlist = <FeedModel>[];
     }
     if ((_feedlist.length == 0 || _feedlist.any((x) => x.key != tweet.key)) &&
-        tweet.isValidTweet) {
+        tweet.isValidPost) {
       _feedlist.add(tweet);
-      cprint('Tweet Added');
+      cprint('Post Added');
     }
     isBusy = false;
     notifyListeners();
@@ -560,14 +560,14 @@ class FeedState extends AppState {
           // Decrease parent Tweet comment count and update
           var parentModel =
               _feedlist.firstWhere((x) => x.key == deletedTweet.parentkey);
-          parentModel.replyTweetKeyList.remove(deletedTweet.key);
-          parentModel.commentCount = parentModel.replyTweetKeyList.length;
+          parentModel.replyPostKeyList.remove(deletedTweet.key);
+          parentModel.commentCount = parentModel.replyPostKeyList.length;
           updateTweet(parentModel);
         }
         if (_feedlist.length == 0) {
           _feedlist = null;
         }
-        cprint('Tweet deleted from home page tweet list');
+        cprint('Post deleted from home page tweet list');
       }
 
       /// [Delete tweet] if it is in nested tweet detail comment section page
@@ -589,18 +589,18 @@ class FeedState extends AppState {
             _tweetDetailModelList.any((x) => x.key == parentkey)) {
           var parentModel =
               _tweetDetailModelList.firstWhere((x) => x.key == parentkey);
-          parentModel.replyTweetKeyList.remove(deletedTweet.key);
-          parentModel.commentCount = parentModel.replyTweetKeyList.length;
+          parentModel.replyPostKeyList.remove(deletedTweet.key);
+          parentModel.commentCount = parentModel.replyPostKeyList.length;
           cprint('Parent tweet comment count updated on child tweet removal');
           updateTweet(parentModel);
         }
 
-        cprint('Tweet deleted from nested tweet detail comment section');
+        cprint('Post deleted from nested tweet detail comment section');
       }
 
       /// Delete tweet image from firebase storage if exist.
       if (deletedTweet.imagePath != null && deletedTweet.imagePath.length > 0) {
-        deleteFile(deletedTweet.imagePath, 'tweetImage');
+        deleteFile(deletedTweet.imagePath, 'postImage');
       }
 
       /// If a retweet is deleted then retweetCount of original tweet should be decrease by 1.
@@ -609,8 +609,8 @@ class FeedState extends AppState {
           if (retweetModel == null) {
             return;
           }
-          if (retweetModel.retweetCount > 0) {
-            retweetModel.retweetCount -= 1;
+          if (retweetModel.repostCount > 0) {
+            retweetModel.repostCount -= 1;
           }
           updateTweet(retweetModel);
         });

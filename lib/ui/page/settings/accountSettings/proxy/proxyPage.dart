@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
+import 'package:routy/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
 
 class ProxyPage extends StatelessWidget {
   const ProxyPage({Key key}) : super(key: key);
@@ -10,7 +10,7 @@ class ProxyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TwitterColor.white,
+      backgroundColor: RoutyColor.white,
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(

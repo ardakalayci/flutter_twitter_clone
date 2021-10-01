@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/headerWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsAppbar.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/page/settings/widgets/headerWidget.dart';
+import 'package:routy/ui/page/settings/widgets/settingsAppbar.dart';
+import 'package:routy/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:routy/ui/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class DirectMessagesPage extends StatelessWidget {
@@ -14,16 +14,16 @@ class DirectMessagesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = Provider.of<AuthState>(context).userModel ?? UserModel();
     return Scaffold(
-      backgroundColor: TwitterColor.white,
+      backgroundColor: RoutyColor.white,
       appBar: SettingsAppBar(
-        title: 'Direct Messages',
+        title: 'Mesajlar',
         subtitle: user.userName,
       ),
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: <Widget>[
           HeaderWidget(
-            'Direct Messages',
+            'Mesajlar',
             secondHeader: true,
           ),
           SettingRowWidget(

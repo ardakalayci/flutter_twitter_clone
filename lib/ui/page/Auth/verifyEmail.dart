@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/emptyList.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class VerifyEmailPage extends StatefulWidget {
@@ -81,7 +81,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: TwitterColor.mystic,
+      backgroundColor: RoutyColor.mystic,
       appBar: AppBar(
         title: customText(
           'Email Verification',

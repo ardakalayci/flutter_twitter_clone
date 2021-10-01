@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
 
 class EmptyList extends StatelessWidget {
   EmptyList(this.title, {this.subTitle});
@@ -12,7 +12,7 @@ class EmptyList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: context.height - 135,
-        color: TwitterColor.mystic,
+        color: RoutyColor.mystic,
         child: NotifyText(
           title: title,
           subTitle: subTitle,

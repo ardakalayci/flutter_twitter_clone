@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/widgets/settingsRowWidget.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/ui/page/settings/widgets/settingsRowWidget.dart';
+import 'package:routy/state/searchState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class TrendsPage extends StatelessWidget {
@@ -20,7 +20,7 @@ class TrendsPage extends StatelessWidget {
         return Container(
           height: height,
           decoration: BoxDecoration(
-            color: TwitterColor.white,
+            color: RoutyColor.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15),
               topRight: Radius.circular(15),
@@ -43,7 +43,7 @@ class TrendsPage extends StatelessWidget {
             width: 40,
             height: 5,
             decoration: BoxDecoration(
-              color: TwitterColor.paleSky50,
+              color: RoutyColor.paleSky50,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -72,7 +72,7 @@ class TrendsPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
       child: RadioListTile<SortUser>(
         value: sortBy,
-        activeColor: TwitterColor.dodgetBlue,
+        activeColor: RoutyColor.dodgetBlue,
         groupValue: state.sortBy,
         onChanged: (val) {
           context.read<SearchState>().updateUserSortPrefrence = val;
@@ -87,7 +87,7 @@ class TrendsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TwitterColor.white,
+      backgroundColor: RoutyColor.white,
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText('Trends'),
@@ -96,7 +96,7 @@ class TrendsPage extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         children: <Widget>[
           SettingRowWidget(
-            "Search Filter",
+            "Filtre",
             subtitle:
                 context.select((SearchState value) => value.selectedFilter),
             onPressed: () {
@@ -105,7 +105,7 @@ class TrendsPage extends StatelessWidget {
             showDivider: false,
           ),
           SettingRowWidget(
-            "Trends location",
+            "Yakınındaki Trendler",
             navigateTo: null,
             subtitle: 'New York',
             showDivider: false,

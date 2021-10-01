@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/notificationModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:routy/model/notificationModel.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
 
 class FollowNotificationTile extends StatelessWidget {
   final NotificationModel model;
@@ -16,7 +16,7 @@ class FollowNotificationTile extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: TwitterColor.white,
+          color: RoutyColor.white,
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 26),
           child: Column(
             children: [
@@ -46,7 +46,7 @@ class _UserCard extends StatelessWidget {
   final UserModel user;
   const _UserCard({Key key, this.user}) : super(key: key);
   String getBio(String bio) {
-    if (bio == "Edit profile to update bio") {
+    if (bio == "Bionu düzenle") {
       return "No bio available";
     } else {
       return bio.takeOnly(100);
@@ -84,7 +84,7 @@ class _UserCard extends StatelessWidget {
                     user.isVerified
                         ? customIcon(context,
                             icon: AppIcon.blueTick,
-                            istwitterIcon: true,
+                            iscustomIcon: true,
                             iconColor: AppColor.primary,
                             size: 13,
                             paddingIcon: 3)

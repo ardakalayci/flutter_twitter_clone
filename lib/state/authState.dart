@@ -7,11 +7,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/shared_prefrence_helper.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/common/locator.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/shared_prefrence_helper.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/ui/page/common/locator.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path/path.dart' as Path;
 
@@ -140,10 +140,10 @@ class AuthState extends AppState {
     // If user is new then add new user to firebase realtime kDatabase
     if (diff < Duration(seconds: 15)) {
       UserModel model = UserModel(
-        bio: 'Edit profile to update bio',
+        bio: 'Bionu düzenle',
         dob: DateTime(1950, DateTime.now().month, DateTime.now().day + 3)
             .toString(),
-        location: 'Somewhere in universe',
+        location: 'Dünyanın herhangi bir yerinde',
         profilePic: user.photoURL,
         displayName: user.displayName,
         email: user.email,

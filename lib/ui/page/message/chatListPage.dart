@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/chatModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/rippleButton.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/helper/constant.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/chatModel.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/chats/chatState.dart';
+import 'package:routy/state/searchState.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/emptyList.dart';
+import 'package:routy/widgets/newWidget/rippleButton.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -42,9 +42,9 @@ class _ChatListPageState extends State<ChatListPage> {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 30),
         child: EmptyList(
-          'No message available ',
+          'Mesaj yok ',
           subTitle:
-              'When someone sends you message,UserModel list\'ll show up here \n  To send message tap message button.',
+              'Yeni mesaj göndermek için butonu kullan',
         ),
       );
     } else {
@@ -126,14 +126,14 @@ class _ChatListPageState extends State<ChatListPage> {
   }
 
   FloatingActionButton _newMessageButton() {
-    return FloatingActionButton(
+    return FloatingActionButton(backgroundColor:Colors.deepOrange,
       onPressed: () {
         Navigator.of(context).pushNamed('/NewMessagePage');
       },
       child: customIcon(
         context,
         icon: AppIcon.newMessage,
-        istwitterIcon: true,
+        iscustomIcon: true,
         iconColor: Theme.of(context).colorScheme.onPrimary,
         size: 25,
       ),
@@ -162,13 +162,13 @@ class _ChatListPageState extends State<ChatListPage> {
       appBar: CustomAppBar(
         scaffoldKey: widget.scaffoldKey,
         title: customTitleText(
-          'Messages',
+          'Mesajlar',
         ),
         icon: AppIcon.settings,
         onActionPressed: onSettingIconPressed,
       ),
       floatingActionButton: _newMessageButton(),
-      backgroundColor: TwitterColor.mystic,
+      backgroundColor: RoutyColor.mystic,
       body: _body(),
     );
   }

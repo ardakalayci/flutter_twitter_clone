@@ -1,28 +1,28 @@
-import 'package:flutter_twitter_clone/state/profile_state.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/EditProfilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followerListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profileImageView.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/qrCode/scanner.dart';
+import 'package:routy/state/profile_state.dart';
+import 'package:routy/ui/page/profile/EditProfilePage.dart';
+import 'package:routy/ui/page/profile/follow/followerListPage.dart';
+import 'package:routy/ui/page/profile/profileImageView.dart';
+import 'package:routy/ui/page/profile/qrCode/scanner.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/tabPainter.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/cache_image.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/rippleButton.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/tweet.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetBottomSheet.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/page/profile/widgets/tabPainter.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/chats/chatState.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/cache_image.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/customLoader.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
+import 'package:routy/widgets/newWidget/emptyList.dart';
+import 'package:routy/widgets/newWidget/rippleButton.dart';
+import 'package:routy/widgets/tweet/tweet.dart';
+import 'package:routy/widgets/tweet/widgets/tweetBottomSheet.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -170,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage>
                               isMyProfile
                                   ? Container(height: 40)
                                   : RippleButton(
-                                      splashColor: TwitterColor.dodgetBlue_50
+                                      splashColor: RoutyColor.dodgetBlue_50
                                           .withAlpha(100),
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(20),
@@ -199,12 +199,12 @@ class _ProfilePageState extends State<ProfilePage>
                                                 color: isMyProfile
                                                     ? Colors.black87
                                                         .withAlpha(180)
-                                                    : Colors.blue,
+                                                    : Colors.deepOrange,
                                                 width: 1),
                                             shape: BoxShape.circle),
                                         child: Icon(
                                           AppIcon.messageEmpty,
-                                          color: Colors.blue,
+                                          color: Colors.deepOrange,
                                           size: 20,
                                         ),
 
@@ -213,8 +213,9 @@ class _ProfilePageState extends State<ProfilePage>
                                     ),
                               SizedBox(width: 10),
                               RippleButton(
+
                                 splashColor:
-                                    TwitterColor.dodgetBlue_50.withAlpha(100),
+                                    Colors.deepOrange.withAlpha(100),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(60)),
                                 onPressed: () {
@@ -233,12 +234,12 @@ class _ProfilePageState extends State<ProfilePage>
                                   ),
                                   decoration: BoxDecoration(
                                     color: isFollower()
-                                        ? TwitterColor.dodgetBlue
-                                        : TwitterColor.white,
+                                        ? Colors.deepOrange
+                                        : RoutyColor.white,
                                     border: Border.all(
                                         color: isMyProfile
                                             ? Colors.black87.withAlpha(180)
-                                            : Colors.blue,
+                                            : Colors.deepOrange,
                                         width: 1),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
@@ -247,16 +248,16 @@ class _ProfilePageState extends State<ProfilePage>
                                   // Otherwise Follow/Following button will be display
                                   child: Text(
                                     isMyProfile
-                                        ? 'Edit Profile'
+                                        ? 'Profilini Düzenle'
                                         : isFollower()
-                                            ? 'Following'
-                                            : 'Follow',
+                                            ? 'Takip Ediliyor'
+                                            : 'Takip Et',
                                     style: TextStyle(
                                       color: isMyProfile
                                           ? Colors.black87.withAlpha(180)
                                           : isFollower()
-                                              ? TwitterColor.white
-                                              : Colors.blue,
+                                              ? RoutyColor.white
+                                              : Colors.deepOrange,
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -282,8 +283,8 @@ class _ProfilePageState extends State<ProfilePage>
       },
       child: customIcon(
         context,
-        icon: AppIcon.fabTweet,
-        istwitterIcon: true,
+        icon: AppIcon.fabPost,
+        iscustomIcon: true,
         iconColor: Theme.of(context).colorScheme.onPrimary,
         size: 25,
       ),
@@ -323,8 +324,8 @@ class _ProfilePageState extends State<ProfilePage>
       socialMetaTagParameters: SocialMetaTagParameters(
         description: !user.bio.contains("Edit profile")
             ? user.bio
-            : "Checkout ${user.displayName}'s profile on Fwitter app",
-        title: "${user.displayName} is on Fwitter app",
+            : "Checkout ${user.displayName}'s profile on Routy app",
+        title: "${user.displayName} is on Routy app",
         imageUrl: Uri.parse(user.profilePic),
       ),
     );
@@ -346,7 +347,7 @@ class _ProfilePageState extends State<ProfilePage>
       child: Scaffold(
         key: scaffoldKey,
         floatingActionButton: !isMyProfile ? null : _floatingActionButton(),
-        backgroundColor: TwitterColor.mystic,
+        backgroundColor: RoutyColor.mystic,
         body: NestedScrollView(
           // controller: _scrollController,
           headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
@@ -369,14 +370,15 @@ class _ProfilePageState extends State<ProfilePage>
                 delegate: SliverChildListDelegate(
                   [
                     Container(
-                      color: TwitterColor.white,
+                      color: RoutyColor.white,
                       child: TabBar(
+                        indicatorColor: Colors.deepOrange,
                         indicator: TabIndicator(),
                         controller: _tabController,
                         tabs: <Widget>[
-                          Text("Tweets"),
-                          Text("Tweets & replies"),
-                          Text("Media")
+                          Text("Gönderiler"),
+                          Text("Rotalar"),
+                          Text("Lokasyonlar")
                         ],
                       ),
                     )
@@ -446,8 +448,8 @@ class _ProfilePageState extends State<ProfilePage>
                 padding: EdgeInsets.only(top: 50, left: 30, right: 30),
                 child: NotifyText(
                   title: isMyProfile
-                      ? 'You haven\'t ${isreply ? 'reply to any Tweet' : isMedia ? 'post any media Tweet yet' : 'post any Tweet yet'}'
-                      : '${authstate.profileUserModel.userName} hasn\'t ${isreply ? 'reply to any Tweet' : isMedia ? 'post any media Tweet yet' : 'post any Tweet yet'}',
+                      ? 'You haven\'t ${isreply ? 'reply to any Post' : isMedia ? 'post any media Post yet' : 'post any Tweet yet'}'
+                      : '${authstate.profileUserModel.userName} hasn\'t ${isreply ? 'reply to any Post' : isMedia ? 'post any media Tweet yet' : 'post any Tweet yet'}',
                   subTitle: isMyProfile
                       ? 'Tap tweet button to add new'
                       : 'Once he\'ll do, they will be shown up here',
@@ -459,14 +461,14 @@ class _ProfilePageState extends State<ProfilePage>
                 padding: EdgeInsets.symmetric(vertical: 0),
                 itemCount: list.length,
                 itemBuilder: (context, index) => Container(
-                  color: TwitterColor.white,
-                  child: Tweet(
+                  color: RoutyColor.white,
+                  child: Post(
                     model: list[index],
                     isDisplayOnProfile: true,
-                    trailing: TweetBottomSheet().tweetOptionIcon(
+                    trailing: PostBottomSheet().tweetOptionIcon(
                       context,
                       model: list[index],
-                      type: TweetType.Tweet,
+                      type: PostType.Post,
                       scaffoldKey: scaffoldKey,
                     ),
                   ),
@@ -488,8 +490,8 @@ class UserNameRowWidget extends StatelessWidget {
   String getBio(String bio) {
     if (isMyProfile) {
       return bio;
-    } else if (bio == "Edit profile to update bio") {
-      return "No bio available";
+    } else if (bio == "Bionu düzenle") {
+      return "Bio yok";
     } else {
       return bio;
     }
@@ -546,7 +548,7 @@ class UserNameRowWidget extends StatelessWidget {
               user.isVerified
                   ? customIcon(context,
                       icon: AppIcon.blueTick,
-                      istwitterIcon: true,
+                      iscustomIcon: true,
                       iconColor: AppColor.primary,
                       size: 13,
                       paddingIcon: 3)
@@ -575,7 +577,7 @@ class UserNameRowWidget extends StatelessWidget {
               customIcon(context,
                   icon: AppIcon.locationPin,
                   size: 14,
-                  istwitterIcon: true,
+                  iscustomIcon: true,
                   paddingIcon: 5,
                   iconColor: AppColor.darkGrey),
               SizedBox(width: 10),
@@ -595,7 +597,7 @@ class UserNameRowWidget extends StatelessWidget {
               customIcon(context,
                   icon: AppIcon.calender,
                   size: 14,
-                  istwitterIcon: true,
+                  iscustomIcon: true,
                   paddingIcon: 5,
                   iconColor: AppColor.darkGrey),
               SizedBox(width: 10),
@@ -614,7 +616,7 @@ class UserNameRowWidget extends StatelessWidget {
                 width: 10,
                 height: 30,
               ),
-              _tappbleText(context, '${user.getFollower}', ' Followers', () {
+              _tappbleText(context, '${user.getFollower}', ' Takipçi', () {
                 var state = context.read<ProfileState>();
                 Navigator.push(
                     context,
@@ -623,7 +625,7 @@ class UserNameRowWidget extends StatelessWidget {
                         userList: state.profileUserModel.followersList));
               }),
               SizedBox(width: 40),
-              _tappbleText(context, '${user.getFollowing}', ' Following', () {
+              _tappbleText(context, '${user.getFollowing}', ' Takip ediyor', () {
                 var state = context.read<ProfileState>();
                 Navigator.push(
                     context,
@@ -647,10 +649,10 @@ class Choice {
 }
 
 const List<Choice> choices = const <Choice>[
-  const Choice(title: 'Share', icon: Icons.directions_car, isEnable: true),
+  const Choice(title: 'Paylaş', icon: Icons.directions_car, isEnable: true),
   const Choice(
-      title: 'QR code', icon: Icons.directions_railway, isEnable: true),
-  const Choice(title: 'Draft', icon: Icons.directions_bike),
-  const Choice(title: 'View Lists', icon: Icons.directions_boat),
-  const Choice(title: 'View Moments', icon: Icons.directions_bus),
+      title: 'QR kod', icon: Icons.directions_railway, isEnable: true),
+  //const Choice(title: 'Draft', icon: Icons.directions_bike),
+  //const Choice(title: 'View Lists', icon: Icons.directions_boat),
+  //const Choice(title: 'View Moments', icon: Icons.directions_bus),
 ];

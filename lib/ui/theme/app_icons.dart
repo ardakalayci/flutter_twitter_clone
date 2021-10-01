@@ -3,15 +3,14 @@ part of 'theme.dart';
 class AppIcon {
   AppIcon._();
 
-  static const _kFontFam = 'TwitterIcon';
-  static const IconData fabTweet = IconData(0xf029, fontFamily: _kFontFam);
+  static const _kFontFam = 'RoutyIcon';
+  static const IconData fabPost = IconData(0xf029, fontFamily: _kFontFam);
   static const IconData messageEmpty = IconData(0xf187, fontFamily: _kFontFam);
   static const IconData messageFill = IconData(0xf554, fontFamily: _kFontFam);
   static const IconData search = IconData(0xf058, fontFamily: _kFontFam);
   static const IconData searchFill = IconData(0xf558, fontFamily: _kFontFam);
   static const IconData notification = IconData(0xf055, fontFamily: _kFontFam);
-  static const IconData notificationFill =
-      IconData(0xf019, fontFamily: _kFontFam);
+  static const IconData notificationFill = IconData(0xf019, fontFamily: _kFontFam);
   static const IconData messageFab = IconData(0xf053, fontFamily: _kFontFam);
   static const IconData home = IconData(0xf053, fontFamily: _kFontFam);
   static const IconData homeFill = IconData(0xF553, fontFamily: _kFontFam);

@@ -5,13 +5,13 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/selectAuthMethod.dart';
-import 'package:flutter_twitter_clone/ui/page/common/updateApp.dart';
-import 'package:flutter_twitter_clone/ui/page/homePage.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/page/Auth/selectAuthMethod.dart';
+import 'package:routy/ui/page/common/updateApp.dart';
+import 'package:routy/ui/page/homePage.dart';
+import 'package:routy/ui/theme/theme.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
@@ -53,8 +53,8 @@ class _SplashPageState extends State<SplashPage> {
   /// Once user update app with latest verson and back to app then user automatically redirected to welcome / Home page
   Future<bool> _checkAppVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final currentAppVersion = "${packageInfo.version}";
-    final appVersion = await _getAppVersionFromFirebaseConfig();
+    final currentAppVersion = "1";//"${packageInfo.version}";
+    final appVersion ="1"; //await _getAppVersionFromFirebaseConfig();
     if (appVersion != currentAppVersion) {
       if (kDebugMode) {
         cprint("Latest version of app is not installed on your system");
@@ -92,11 +92,16 @@ class _SplashPageState extends State<SplashPage> {
   Future<String> _getAppVersionFromFirebaseConfig() async {
     final RemoteConfig remoteConfig = await RemoteConfig.instance;
     await remoteConfig.fetchAndActivate();
+    await remoteConfig.setConfigSettings(RemoteConfigSettings(
+      fetchTimeout: Duration(seconds: 10),
+      minimumFetchInterval: Duration(hours: 1),
+    ));
     // await remoteConfig.activateFetched();
-    var data = remoteConfig.getString('appVersion');
+    var data = await remoteConfig.getString('appVersion');
     if (data != null && data.isNotEmpty) {
       return jsonDecode(data)["key"];
     } else {
+      debugPrint(data.toString());
       cprint(
           "Please add your app's current version into Remote config in firebase",
           errorIn: "_getAppVersionFromFirebaseConfig");
@@ -147,7 +152,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     var state = Provider.of<AuthState>(context);
     return Scaffold(
-      backgroundColor: TwitterColor.white,
+      backgroundColor: RoutyColor.white,
       body: state.authStatus == AuthStatus.NOT_DETERMINED
           ? _body()
           : state.authStatus == AuthStatus.NOT_LOGGED_IN

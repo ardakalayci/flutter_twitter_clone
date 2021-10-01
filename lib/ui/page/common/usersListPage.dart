@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/common/widget/userListWidget.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/emptyList.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/searchState.dart';
+import 'package:routy/ui/page/common/widget/userListWidget.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/emptyList.dart';
 import 'package:provider/provider.dart';
 
 class UsersListPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class UsersListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<UserModel> userList;
     return Scaffold(
-      backgroundColor: TwitterColor.mystic,
+      backgroundColor: RoutyColor.mystic,
       appBar: CustomAppBar(
           isBackButton: true,
           title: customTitleText(pageTitle),

@@ -1,16 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/widget/googleLoginButton.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customFlatButton.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/customLoader.dart';
+import 'package:routy/helper/constant.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/page/Auth/widget/googleLoginButton.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customFlatButton.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/customLoader.dart';
 import 'package:provider/provider.dart';
 
 class Signup extends StatefulWidget {
@@ -155,7 +155,7 @@ class _SignupState extends State<Signup> {
 
     UserModel user = UserModel(
       email: _emailController.text.toLowerCase(),
-      bio: 'Edit profile to update bio',
+      bio: 'Bionu düzenle',
       // contact:  _mobileController.text,
       displayName: _nameController.text,
       dob: DateTime(1950, DateTime.now().month, DateTime.now().day + 3)

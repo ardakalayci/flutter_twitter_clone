@@ -3,21 +3,24 @@ import 'dart:async';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/push_notification_model.dart';
-import 'package:flutter_twitter_clone/resource/push_notification_service.dart';
-import 'package:flutter_twitter_clone/state/appState.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/state/notificationState.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/feedPage.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/feedPostDetail.dart';
-import 'package:flutter_twitter_clone/ui/page/message/chatListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/widgets/bottomMenuBar/bottomMenuBar.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/push_notification_model.dart';
+import 'package:routy/resource/push_notification_service.dart';
+import 'package:routy/state/appState.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/chats/chatState.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/state/notificationState.dart';
+import 'package:routy/state/searchState.dart';
+import 'package:routy/ui/page/feed/composePost/composePost.dart';
+import 'package:routy/ui/page/feed/composePost/state/composeTweetState.dart';
+import 'package:routy/ui/page/feed/feedPage.dart';
+import 'package:routy/ui/page/feed/feedPostDetail.dart';
+import 'package:routy/ui/page/message/chatListPage.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/route_create/route_create_page.dart';
+import 'package:routy/widgets/bottomMenuBar/bottomMenuBar.dart';
 import 'package:provider/provider.dart';
 
 import 'common/locator.dart';
@@ -34,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   int pageIndex = 0;
+
   // ignore: cancel_subscriptions
   StreamSubscription<PushNotificationModel> pushNotificationSubscription;
   @override
@@ -120,8 +124,8 @@ class _HomePageState extends State<HomePage> {
     else if (model.type == NotificationType.Mention.toString() &&
         model.receiverId == authstate.user.uid) {
       var feedstate = Provider.of<FeedState>(context, listen: false);
-      feedstate.getpostDetailFromDatabase(model.tweetId);
-      Navigator.push(context, FeedPostDetail.getRoute(model.tweetId));
+      feedstate.getpostDetailFromDatabase(model.postId);
+      Navigator.push(context, FeedPostDetail.getRoute(model.postId));
     }
   }
 
@@ -185,6 +189,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _getPage(int index) {
+    final state = context.watch<AuthState>();
     switch (index) {
       case 0:
         return FeedPage(
@@ -196,10 +201,16 @@ class _HomePageState extends State<HomePage> {
         return SearchPage(scaffoldKey: _scaffoldKey);
         break;
       case 2:
-        return NotificationPage(scaffoldKey: _scaffoldKey);
+        return ChangeNotifierProvider<ComposeTweetState>(
+          create: (_) => ComposeTweetState(),
+          child: ComposePostPage(isRetweet: false, isTweet: true),
+        );
         break;
       case 3:
         return ChatListPage(scaffoldKey: _scaffoldKey);
+        break;
+      case 4:
+        return NotificationPage(scaffoldKey: _scaffoldKey);
         break;
       default:
         return FeedPage(scaffoldKey: _scaffoldKey);

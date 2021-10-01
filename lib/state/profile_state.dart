@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/user.dart';
 import 'package:firebase_database/firebase_database.dart' as dabase;
 
 class ProfileState extends ChangeNotifier {
@@ -160,7 +160,7 @@ class ProfileState extends ChangeNotifier {
               profilePic: userModel.profilePic,
               isVerified: userModel.isVerified,
               userId: userModel.userId,
-              bio: userModel.bio == "Edit profile to update bio"
+              bio: userModel.bio == "Bionu düzenle"
                   ? ""
                   : userModel.bio,
               userName: userModel.userName)

@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/common/locator.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/state/searchState.dart';
+import 'package:routy/ui/page/common/locator.dart';
+import 'package:routy/ui/theme/theme.dart';
 import 'helper/routes.dart';
 import 'state/appState.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             create: (_) => NotificationState()),
       ],
       child: MaterialApp(
-        title: 'Fwitter',
+        title: 'Routy',
         theme: AppTheme.apptheme.copyWith(
           textTheme: GoogleFonts.mulishTextTheme(
             Theme.of(context).textTheme,

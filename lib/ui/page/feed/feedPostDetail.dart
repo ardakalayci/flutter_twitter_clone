@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/customRoute.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/tweet.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/widgets/tweetBottomSheet.dart';
+import 'package:routy/helper/customRoute.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/tweet/tweet.dart';
+import 'package:routy/widgets/tweet/widgets/tweetBottomSheet.dart';
 import 'package:provider/provider.dart';
 
 class FeedPostDetail extends StatefulWidget {
@@ -41,7 +41,7 @@ class _FeedPostDetailState extends State<FeedPostDetail> {
     return FloatingActionButton(
       onPressed: () {
         var state = Provider.of<FeedState>(context, listen: false);
-        state.setTweetToReply = state.tweetDetailModel?.last;
+        state.setPostToReply = state.tweetDetailModel?.last;
         Navigator.of(context).pushNamed('/ComposeTweetPage/' + postId);
       },
       child: Icon(Icons.add),
@@ -49,20 +49,20 @@ class _FeedPostDetailState extends State<FeedPostDetail> {
   }
 
   Widget _commentRow(FeedModel model) {
-    return Tweet(
+    return Post(
       model: model,
-      type: TweetType.Reply,
-      trailing: TweetBottomSheet().tweetOptionIcon(context,
-          scaffoldKey: scaffoldKey, model: model, type: TweetType.Reply),
+      type: PostType.Reply,
+      trailing: PostBottomSheet().tweetOptionIcon(context,
+          scaffoldKey: scaffoldKey, model: model, type: PostType.Reply),
     );
   }
 
   Widget _tweetDetail(FeedModel model) {
-    return Tweet(
+    return Post(
       model: model,
-      type: TweetType.Detail,
-      trailing: TweetBottomSheet().tweetOptionIcon(context,
-          scaffoldKey: scaffoldKey, model: model, type: TweetType.Detail),
+      type: PostType.Detail,
+      trailing: PostBottomSheet().tweetOptionIcon(context,
+          scaffoldKey: scaffoldKey, model: model, type: PostType.Detail),
     );
   }
 
@@ -76,11 +76,11 @@ class _FeedPostDetailState extends State<FeedPostDetail> {
     Navigator.pushNamed(context, '/ImageViewPge');
   }
 
-  void deleteTweet(TweetType type, String tweetId, {String parentkey}) {
+  void deleteTweet(PostType type, String tweetId, {String parentkey}) {
     var state = Provider.of<FeedState>(context, listen: false);
     state.deleteTweet(tweetId, type, parentkey: parentkey);
     Navigator.of(context).pop();
-    if (type == TweetType.Detail) Navigator.of(context).pop();
+    if (type == PostType.Detail) Navigator.of(context).pop();
   }
 
   @override
@@ -100,7 +100,7 @@ class _FeedPostDetailState extends State<FeedPostDetail> {
           slivers: <Widget>[
             SliverAppBar(
               pinned: true,
-              title: customTitleText('Thread'),
+              title: customTitleText('Paylaşım'),
               iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
               backgroundColor: Theme.of(context).appBarTheme.color,
               bottom: PreferredSize(
@@ -121,7 +121,7 @@ class _FeedPostDetailState extends State<FeedPostDetail> {
                   Container(
                     height: 6,
                     width: context.width,
-                    color: TwitterColor.mystic,
+                    color: RoutyColor.mystic,
                   )
                 ],
               ),

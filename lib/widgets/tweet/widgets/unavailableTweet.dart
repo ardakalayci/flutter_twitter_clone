@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/ui/theme/theme.dart';
 
-class UnavailableTweet extends StatelessWidget {
-  const UnavailableTweet({Key key, this.snapshot, this.type}) : super(key: key);
+class UnavailablePost extends StatelessWidget {
+  const UnavailablePost({Key key, this.snapshot, this.type}) : super(key: key);
 
   final AsyncSnapshot<FeedModel> snapshot;
-  final TweetType type;
+  final PostType type;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class UnavailableTweet extends StatelessWidget {
       margin: EdgeInsets.only(
           right: 16,
           top: 5,
-          left: type == TweetType.Tweet || type == TweetType.ParentTweet
+          left: type == PostType.Post || type == PostType.ParentPost
               ? 70
               : 16),
       alignment: Alignment.centerLeft,

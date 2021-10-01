@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/chats/chatState.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/chats/chatState.dart';
+import 'package:routy/state/searchState.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class NewMessagePage extends StatefulWidget {
@@ -49,7 +49,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
           user.isVerified
               ? customIcon(context,
                   icon: AppIcon.blueTick,
-                  istwitterIcon: true,
+                  iscustomIcon: true,
                   iconColor: AppColor.primary,
                   size: 13,
                   paddingIcon: 3)
@@ -88,18 +88,18 @@ class _NewMessagePageState extends State<NewMessagePage> {
                     state.filterByUsername(text);
                   },
                   decoration: InputDecoration(
-                    hintText: "Search for people and groups",
+                    hintText: "Kişileri Ara",
                     hintStyle: TextStyle(fontSize: 20),
                     prefixIcon: customIcon(
                       context,
                       icon: AppIcon.search,
-                      istwitterIcon: true,
-                      iconColor: TwitterColor.woodsmoke_50,
+                      iscustomIcon: true,
+                      iconColor: RoutyColor.woodsmoke_50,
                       size: 25,
                       paddingIcon: 5,
                     ),
                     border: InputBorder.none,
-                    fillColor: TwitterColor.mystic,
+                    fillColor: RoutyColor.mystic,
                     filled: true,
                   ),
                 ),

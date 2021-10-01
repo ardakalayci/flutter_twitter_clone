@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/state/notificationState.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/feedPostDetail.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/state/notificationState.dart';
+import 'package:routy/ui/page/feed/feedPostDetail.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
 import 'package:provider/provider.dart';
 
 class PostLikeTile extends StatelessWidget {
@@ -46,8 +46,8 @@ class PostLikeTile extends StatelessWidget {
             SizedBox(width: 20),
             customIcon(context,
                 icon: AppIcon.heartFill,
-                iconColor: TwitterColor.ceriseRed,
-                istwitterIcon: true,
+                iconColor: RoutyColor.ceriseRed,
+                iscustomIcon: true,
                 size: 25),
             SizedBox(width: 10),
             Row(children: avaterList),
@@ -57,7 +57,7 @@ class PostLikeTile extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 60, bottom: 5, top: 5),
           child: TitleText(
-            '$length people like your Tweet',
+            '$length people like your Post',
             fontSize: 18,
             color: Colors.black87,
             fontWeight: FontWeight.w500,
@@ -105,7 +105,7 @@ class PostLikeTile extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: EdgeInsets.symmetric(vertical: 10),
-          color: TwitterColor.white,
+          color: RoutyColor.white,
           child: ListTile(
             onTap: () {
               var state = Provider.of<FeedState>(context, listen: false);

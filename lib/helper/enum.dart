@@ -3,11 +3,12 @@ enum AuthStatus {
   NOT_LOGGED_IN,
   LOGGED_IN,
 }
-enum TweetType {
-  Tweet,
+enum PostType {
+  Post,
   Detail,
   Reply,
-  ParentTweet,
+  ParentPost,
+  Route,
 }
 
 enum SortUser {
@@ -21,9 +22,9 @@ enum SortUser {
 enum NotificationType {
   NOT_DETERMINED,
   Message,
-  Tweet,
+  Post,
   Reply,
-  Retweet,
+  Repost,
   Follow,
   Mention,
   Like

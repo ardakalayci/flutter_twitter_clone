@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/selectAuthMethod.dart';
-import 'package:flutter_twitter_clone/ui/page/Auth/verifyEmail.dart';
-import 'package:flutter_twitter_clone/ui/page/common/splash.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/composeTweet.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/state/composeTweetState.dart';
-import 'package:flutter_twitter_clone/ui/page/message/conversationInformation/conversationInformation.dart';
-import 'package:flutter_twitter_clone/ui/page/message/newMessagePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followerListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/follow/followingListPage.dart';
-import 'package:flutter_twitter_clone/ui/page/search/SearchPage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/about/aboutTwitter.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/accessibility/accessibility.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/accountSettingsPage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/contentPrefrences/contentPreference.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/contentPrefrences/trends/trendsPage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/dataUsage/dataUsagePage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/displaySettings/displayAndSoundPage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/notifications/notificationPage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/privacyAndSafety/directMessage/directMessage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/privacyAndSafety/privacyAndSafetyPage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/accountSettings/proxy/proxyPage.dart';
-import 'package:flutter_twitter_clone/ui/page/settings/settingsAndPrivacyPage.dart';
+import 'package:routy/ui/page/Auth/selectAuthMethod.dart';
+import 'package:routy/ui/page/Auth/verifyEmail.dart';
+import 'package:routy/ui/page/common/splash.dart';
+import 'package:routy/ui/page/feed/composePost/composePost.dart';
+import 'package:routy/ui/page/feed/composePost/state/composeTweetState.dart';
+import 'package:routy/ui/page/message/conversationInformation/conversationInformation.dart';
+import 'package:routy/ui/page/message/newMessagePage.dart';
+import 'package:routy/ui/page/profile/follow/followerListPage.dart';
+import 'package:routy/ui/page/profile/follow/followingListPage.dart';
+import 'package:routy/ui/page/search/SearchPage.dart';
+import 'package:routy/ui/page/settings/accountSettings/about/aboutTwitter.dart';
+import 'package:routy/ui/page/settings/accountSettings/accessibility/accessibility.dart';
+import 'package:routy/ui/page/settings/accountSettings/accountSettingsPage.dart';
+import 'package:routy/ui/page/settings/accountSettings/contentPrefrences/contentPreference.dart';
+import 'package:routy/ui/page/settings/accountSettings/contentPrefrences/trends/trendsPage.dart';
+import 'package:routy/ui/page/settings/accountSettings/dataUsage/dataUsagePage.dart';
+import 'package:routy/ui/page/settings/accountSettings/displaySettings/displayAndSoundPage.dart';
+import 'package:routy/ui/page/settings/accountSettings/notifications/notificationPage.dart';
+import 'package:routy/ui/page/settings/accountSettings/privacyAndSafety/directMessage/directMessage.dart';
+import 'package:routy/ui/page/settings/accountSettings/privacyAndSafety/privacyAndSafetyPage.dart';
+import 'package:routy/ui/page/settings/accountSettings/proxy/proxyPage.dart';
+import 'package:routy/ui/page/settings/settingsAndPrivacyPage.dart';
 import 'package:provider/provider.dart';
 
 import '../helper/customRoute.dart';
@@ -54,20 +54,20 @@ class Routes {
     }
     switch (pathElements[1]) {
       case "ComposeTweetPage":
-        bool isRetweet = false;
-        bool isTweet = false;
-        if (pathElements.length == 3 && pathElements[2].contains('retweet')) {
-          isRetweet = true;
+        bool isRepost = false;
+        bool isPost = false;
+        if (pathElements.length == 3 && pathElements[2].contains('repost')) {
+          isRepost = true;
         } else if (pathElements.length == 3 &&
-            pathElements[2].contains('tweet')) {
-          isTweet = true;
+            pathElements[2].contains('post')) {
+          isPost = true;
         }
         return CustomRoute<bool>(
             builder: (BuildContext context) =>
                 ChangeNotifierProvider<ComposeTweetState>(
                   create: (_) => ComposeTweetState(),
                   child:
-                      ComposeTweetPage(isRetweet: isRetweet, isTweet: isTweet),
+                      ComposePostPage(isRetweet: isRepost, isTweet: isPost),
                 ));
       case "FeedPostDetail":
         var postId = pathElements[2];
@@ -90,7 +90,7 @@ class Routes {
             builder: (BuildContext context) =>
                 ChangeNotifierProvider<ComposeTweetState>(
                   create: (_) => ComposeTweetState(),
-                  child: ComposeTweetPage(isRetweet: false, isTweet: true),
+                  child: ComposePostPage(isRetweet: false, isTweet: true),
                 ));
       case "WelcomePage":
         return CustomRoute<bool>(

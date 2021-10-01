@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/push_notification_model.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/push_notification_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

@@ -2,14 +2,14 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/ui/theme/theme.dart';
 
 Widget customTitleText(String title, {BuildContext context}) {
   return Text(
     title ?? '',
     style: TextStyle(
       color: Colors.black87,
-      fontFamily: 'HelveticaNeue',
+      //fontFamily: 'HelveticaNeue',
       fontWeight: FontWeight.w900,
       fontSize: 20,
     ),
@@ -21,14 +21,14 @@ Widget customIcon(
   IconData icon,
   bool isEnable = false,
   double size = 18,
-  bool istwitterIcon = true,
+  bool iscustomIcon = true,
   bool isFontAwesomeSolid = false,
   Color iconColor,
   double paddingIcon = 10,
 }) {
   iconColor = iconColor ?? Theme.of(context).textTheme.caption.color;
   return Padding(
-    padding: EdgeInsets.only(bottom: istwitterIcon ? paddingIcon : 0),
+    padding: EdgeInsets.only(bottom: iscustomIcon ? paddingIcon : 0),
     child: Icon(
       icon,
       size: size,

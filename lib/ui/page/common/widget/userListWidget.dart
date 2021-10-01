@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/profilePage.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/rippleButton.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/ui/page/profile/profilePage.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/newWidget/rippleButton.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
 import 'package:provider/provider.dart';
 
 class UserListWidget extends StatelessWidget {
@@ -50,7 +50,7 @@ class UserTile extends StatelessWidget {
   /// Return empty string for default bio
   /// Max length of bio is 100
   String getBio(String bio) {
-    if (bio != null && bio.isNotEmpty && bio != "Edit profile to update bio") {
+    if (bio != null && bio.isNotEmpty && bio != "Bionu düzenle") {
       if (bio.length > 100) {
         bio = bio.substring(0, 100) + '...';
         return bio;
@@ -77,7 +77,7 @@ class UserTile extends StatelessWidget {
     bool isFollow = isFollowing();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
-      color: TwitterColor.white,
+      color: RoutyColor.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -109,7 +109,7 @@ class UserTile extends StatelessWidget {
                     ? customIcon(
                         context,
                         icon: AppIcon.blueTick,
-                        istwitterIcon: true,
+                        iscustomIcon: true,
                         iconColor: AppColor.primary,
                         size: 13,
                         paddingIcon: 3,
@@ -120,7 +120,7 @@ class UserTile extends StatelessWidget {
             subtitle: Text(user.userName),
             trailing: RippleButton(
               onPressed: () {},
-              splashColor: TwitterColor.dodgetBlue_50.withAlpha(100),
+              splashColor: RoutyColor.dodgetBlue_50.withAlpha(100),
               borderRadius: BorderRadius.circular(25),
               child: Container(
                 padding: EdgeInsets.symmetric(
@@ -129,14 +129,14 @@ class UserTile extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color:
-                      isFollow ? TwitterColor.dodgetBlue : TwitterColor.white,
-                  border: Border.all(color: TwitterColor.dodgetBlue, width: 1),
+                      isFollow ? RoutyColor.dodgetBlue : RoutyColor.white,
+                  border: Border.all(color: RoutyColor.dodgetBlue, width: 1),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
                   isFollow ? 'Following' : 'Follow',
                   style: TextStyle(
-                    color: isFollow ? TwitterColor.white : Colors.blue,
+                    color: isFollow ? RoutyColor.white : Colors.blue,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),

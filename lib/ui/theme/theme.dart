@@ -6,10 +6,10 @@ part 'extention.dart';
 
 class AppTheme {
   static final ThemeData apptheme = ThemeData(
-      primarySwatch: Colors.blue,
+      primarySwatch: Colors.deepOrange,
       // fontFamily: 'HelveticaNeue',
-      backgroundColor: TwitterColor.white,
-      accentColor: TwitterColor.dodgetBlue,
+      backgroundColor: RoutyColor.white,
+      accentColor: RoutyColor.dodgetBlue,
       brightness: Brightness.light,
       primaryColor: AppColor.primary,
       cardColor: Colors.white,
@@ -18,9 +18,9 @@ class AppTheme {
       bottomSheetTheme: BottomSheetThemeData(backgroundColor: AppColor.white),
       appBarTheme: AppBarTheme(
           brightness: Brightness.light,
-          color: TwitterColor.white,
+          color: RoutyColor.white,
           iconTheme: IconThemeData(
-            color: TwitterColor.dodgetBlue,
+            color: RoutyColor.dodgetBlue,
           ),
           elevation: 0,
           textTheme: TextTheme(
@@ -29,15 +29,15 @@ class AppTheme {
           )),
       tabBarTheme: TabBarTheme(
         labelStyle:
-            TextStyles.titleStyle.copyWith(color: TwitterColor.dodgetBlue),
+            TextStyles.titleStyle.copyWith(color: RoutyColor.dodgetBlue),
         unselectedLabelColor: AppColor.darkGrey,
         unselectedLabelStyle:
             TextStyles.titleStyle.copyWith(color: AppColor.darkGrey),
-        labelColor: TwitterColor.dodgetBlue,
+        labelColor: RoutyColor.dodgetBlue,
         labelPadding: EdgeInsets.symmetric(vertical: 12),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: TwitterColor.dodgetBlue,
+        backgroundColor: RoutyColor.dodgetBlue,
       ),
       colorScheme: ColorScheme(
           background: Colors.white,
@@ -47,8 +47,8 @@ class AppTheme {
           onSecondary: Colors.white,
           onSurface: Colors.black,
           error: Colors.red,
-          primary: Colors.blue,
-          primaryVariant: Colors.blue,
+          primary: Colors.deepOrange,
+          primaryVariant: Colors.deepOrange,
           secondary: AppColor.secondary,
           secondaryVariant: AppColor.darkGrey,
           surface: Colors.white,

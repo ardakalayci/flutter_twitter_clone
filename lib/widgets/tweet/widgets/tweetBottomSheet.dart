@@ -1,20 +1,20 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_twitter_clone/helper/enum.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/share_widget.dart';
-import 'package:flutter_twitter_clone/widgets/tweet/tweet.dart';
+import 'package:routy/helper/enum.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/share_widget.dart';
+import 'package:routy/widgets/tweet/tweet.dart';
 import 'package:provider/provider.dart';
 
-class TweetBottomSheet {
+class PostBottomSheet {
   Widget tweetOptionIcon(BuildContext context,
-      {FeedModel model, TweetType type, GlobalKey<ScaffoldState> scaffoldKey}) {
+      {FeedModel model, PostType type, GlobalKey<ScaffoldState> scaffoldKey}) {
     return Container(
       width: 25,
       height: 25,
@@ -23,7 +23,7 @@ class TweetBottomSheet {
       ),
       child: customIcon(context,
           icon: AppIcon.arrowDown,
-          istwitterIcon: true,
+          iscustomIcon: true,
           iconColor: AppColor.lightGrey),
     ).ripple(
       () {
@@ -35,7 +35,7 @@ class TweetBottomSheet {
   }
 
   void _openbottomSheet(BuildContext context,
-      {TweetType type,
+      {PostType type,
       FeedModel model,
       GlobalKey<ScaffoldState> scaffoldKey}) async {
     var authState = Provider.of<AuthState>(context, listen: false);
@@ -47,7 +47,7 @@ class TweetBottomSheet {
         return Container(
             padding: EdgeInsets.only(top: 5, bottom: 0),
             height: context.height *
-                (type == TweetType.Tweet
+                (type == PostType.Post
                     ? (isMyTweet ? .25 : .44)
                     : (isMyTweet ? .38 : .52)),
             width: context.width,
@@ -58,7 +58,7 @@ class TweetBottomSheet {
                 topRight: Radius.circular(20),
               ),
             ),
-            child: type == TweetType.Tweet
+            child: type == PostType.Post
                 ? _tweetOptions(context,
                     scaffoldKey: scaffoldKey,
                     isMyTweet: isMyTweet,
@@ -76,7 +76,7 @@ class TweetBottomSheet {
   Widget _tweetDetailOptions(BuildContext context,
       {bool isMyTweet,
       FeedModel model,
-      TweetType type,
+      PostType type,
       GlobalKey<ScaffoldState> scaffoldKey}) {
     return Column(
       children: <Widget>[
@@ -91,7 +91,7 @@ class TweetBottomSheet {
           ),
         ),
         _widgetBottomSheetRow(context, AppIcon.link,
-            text: 'Copy link to tweet', isEnable: true, onPressed: () async {
+            text: 'Copy link to post', isEnable: true, onPressed: () async {
           Navigator.pop(context);
           var uri = await Utility.createLinkToShare(
             context,
@@ -113,7 +113,7 @@ class TweetBottomSheet {
             ? _widgetBottomSheetRow(
                 context,
                 AppIcon.delete,
-                text: 'Delete Tweet',
+                text: 'Delete Post',
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -134,10 +134,10 @@ class TweetBottomSheet {
                         TextButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                              TwitterColor.dodgetBlue,
+                              RoutyColor.dodgetBlue,
                             ),
                             foregroundColor: MaterialStateProperty.all(
-                              TwitterColor.white,
+                              RoutyColor.white,
                             ),
                           ),
                           onPressed: () {
@@ -198,7 +198,7 @@ class TweetBottomSheet {
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.report,
-                text: 'Report Tweet',
+                text: 'Report Post',
               ),
       ],
     );
@@ -207,7 +207,7 @@ class TweetBottomSheet {
   Widget _tweetOptions(BuildContext context,
       {bool isMyTweet,
       FeedModel model,
-      TweetType type,
+      PostType type,
       GlobalKey<ScaffoldState> scaffoldKey}) {
     return Column(
       children: <Widget>[
@@ -222,14 +222,14 @@ class TweetBottomSheet {
           ),
         ),
         _widgetBottomSheetRow(context, AppIcon.link,
-            text: 'Copy link to tweet', isEnable: true, onPressed: () async {
+            text: 'Copy link to Post', isEnable: true, onPressed: () async {
           var uri = await Utility.createLinkToShare(
             context,
             "tweet/${model.key}",
             socialMetaTagParameters: SocialMetaTagParameters(
                 description: model.description ??
-                    "${model.user.displayName} posted a tweet on Fwitter.",
-                title: "Tweet on Fwitter app",
+                    "${model.user.displayName} posted a route on Routy.",
+                title: "Route on Routy app",
                 imageUrl: Uri.parse(
                     "https://play-lh.googleusercontent.com/e66XMuvW5hZ7HnFf8R_lcA3TFgkxm0SuyaMsBs3KENijNHZlogUAjxeu9COqsejV5w=s180-rw")),
           );
@@ -244,7 +244,7 @@ class TweetBottomSheet {
             ? _widgetBottomSheetRow(
                 context,
                 AppIcon.delete,
-                text: 'Delete Tweet',
+                text: 'Delete Post',
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -265,10 +265,10 @@ class TweetBottomSheet {
                         TextButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                              TwitterColor.dodgetBlue,
+                              RoutyColor.dodgetBlue,
                             ),
                             foregroundColor: MaterialStateProperty.all(
-                              TwitterColor.white,
+                              RoutyColor.white,
                             ),
                           ),
                           onPressed: () {
@@ -326,7 +326,7 @@ class TweetBottomSheet {
             : _widgetBottomSheetRow(
                 context,
                 AppIcon.report,
-                text: 'Report Tweet',
+                text: 'Report Post',
               ),
       ],
     );
@@ -342,7 +342,7 @@ class TweetBottomSheet {
             customIcon(
               context,
               icon: icon,
-              istwitterIcon: true,
+              iscustomIcon: true,
               size: 25,
               paddingIcon: 8,
               iconColor:
@@ -372,13 +372,13 @@ class TweetBottomSheet {
     );
   }
 
-  void _deleteTweet(BuildContext context, TweetType type, String tweetId,
+  void _deleteTweet(BuildContext context, PostType type, String tweetId,
       {String parentkey}) {
     var state = Provider.of<FeedState>(context, listen: false);
     state.deleteTweet(tweetId, type, parentkey: parentkey);
     // CLose bottom sheet
     Navigator.of(context).pop();
-    if (type == TweetType.Detail) {
+    if (type == PostType.Detail) {
       // Close Tweet detail page
       Navigator.of(context).pop();
       // Remove last tweet from tweet detail stack page
@@ -387,7 +387,7 @@ class TweetBottomSheet {
   }
 
   void openRetweetbottomSheet(BuildContext context,
-      {TweetType type,
+      {PostType type,
       FeedModel model,
       GlobalKey<ScaffoldState> scaffoldKey}) async {
     await showModalBottomSheet(
@@ -410,7 +410,7 @@ class TweetBottomSheet {
     );
   }
 
-  Widget _retweet(BuildContext context, FeedModel model, TweetType type) {
+  Widget _retweet(BuildContext context, FeedModel model, PostType type) {
     return Column(
       children: <Widget>[
         Container(
@@ -427,7 +427,7 @@ class TweetBottomSheet {
           context,
           AppIcon.retweet,
           isEnable: true,
-          text: 'Retweet',
+          text: 'Repost',
           onPressed: () async {
             var state = Provider.of<FeedState>(context, listen: false);
             var authState = Provider.of<AuthState>(context, listen: false);
@@ -448,10 +448,10 @@ class TweetBottomSheet {
 
             Navigator.pop(context);
             var sharedPost = await state.fetchTweet(post.childRetwetkey);
-            if (sharedPost.retweetCount == null) {
-              sharedPost.retweetCount = 0;
+            if (sharedPost.repostCount == null) {
+              sharedPost.repostCount = 0;
             }
-            sharedPost.retweetCount += 1;
+            sharedPost.repostCount += 1;
             state.updateTweet(sharedPost);
           },
         ),
@@ -463,12 +463,12 @@ class TweetBottomSheet {
           onPressed: () {
             var state = Provider.of<FeedState>(context, listen: false);
             // Prepare current Tweet model to reply
-            state.setTweetToReply = model;
+            state.setPostToReply = model;
             Navigator.pop(context);
 
             /// `/ComposeTweetPage/retweet` route is used to identify that tweet is going to be retweet.
             /// To simple reply on any `Tweet` use `ComposeTweetPage` route.
-            Navigator.of(context).pushNamed('/ComposeTweetPage/retweet');
+            Navigator.of(context).pushNamed('/ComposeTweetPage/repost');
           },
         )
       ],
@@ -476,7 +476,7 @@ class TweetBottomSheet {
   }
 
   void openShareTweetBottomSheet(
-      BuildContext context, FeedModel model, TweetType type) async {
+      BuildContext context, FeedModel model, PostType type) async {
     await showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
@@ -497,10 +497,10 @@ class TweetBottomSheet {
     );
   }
 
-  Widget _shareTweet(BuildContext context, FeedModel model, TweetType type) {
+  Widget _shareTweet(BuildContext context, FeedModel model, PostType type) {
     var socialMetaTagParameters = SocialMetaTagParameters(
         description: model.description ?? "",
-        title: "${model.user.displayName} posted a tweet on Fwitter.",
+        title: "${model.user.displayName} posted a route on Routy.",
         imageUrl: Uri.parse(model.user?.profilePic ??
             "https://play-lh.googleusercontent.com/e66XMuvW5hZ7HnFf8R_lcA3TFgkxm0SuyaMsBs3KENijNHZlogUAjxeu9COqsejV5w=s180-rw"));
     return Column(
@@ -539,14 +539,14 @@ class TweetBottomSheet {
           onPressed: () {
             socialMetaTagParameters = SocialMetaTagParameters(
                 description: model.description ?? "",
-                title: "${model.user.displayName} posted a tweet on Fwitter.",
+                title: "${model.user.displayName} posted a route on Routy.",
                 imageUrl: Uri.parse(model.user?.profilePic ??
                     "https://play-lh.googleusercontent.com/e66XMuvW5hZ7HnFf8R_lcA3TFgkxm0SuyaMsBs3KENijNHZlogUAjxeu9COqsejV5w=s180-rw"));
             Navigator.pop(context);
             Navigator.push(
               context,
               ShareWidget.getRoute(
-                  child: Tweet(
+                  child: Post(
                     model: model,
                     type: type,
                   ),

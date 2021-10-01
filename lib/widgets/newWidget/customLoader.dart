@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
+import 'package:routy/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -67,8 +67,8 @@ class CustomScreenLoader extends StatelessWidget {
   const CustomScreenLoader(
       {Key key,
       this.backgroundColor = const Color(0xfff8f8f8),
-      this.height = 30,
-      this.width = 30})
+      this.height = 35,
+      this.width = 35})
       : super(key: key);
 
   @override
@@ -96,8 +96,8 @@ class CustomScreenLoader extends StatelessWidget {
                     ),
               Image.asset(
                 'assets/images/icon-480.png',
-                height: 30,
-                width: 30,
+                height: 35,
+                width: 35,
               )
             ],
           ),

@@ -1,27 +1,28 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_twitter_clone/helper/constant.dart';
-import 'package:flutter_twitter_clone/helper/utility.dart';
-import 'package:flutter_twitter_clone/model/feedModel.dart';
-import 'package:flutter_twitter_clone/model/user.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/state/composeTweetState.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/widget/composeBottomIconWidget.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/widget/composeTweetImage.dart';
-import 'package:flutter_twitter_clone/ui/page/feed/composeTweet/widget/widgetView.dart';
-import 'package:flutter_twitter_clone/state/authState.dart';
-import 'package:flutter_twitter_clone/state/feedState.dart';
-import 'package:flutter_twitter_clone/state/searchState.dart';
-import 'package:flutter_twitter_clone/ui/page/profile/widgets/circular_image.dart';
-import 'package:flutter_twitter_clone/ui/theme/theme.dart';
-import 'package:flutter_twitter_clone/widgets/customAppBar.dart';
-import 'package:flutter_twitter_clone/widgets/customWidgets.dart';
-import 'package:flutter_twitter_clone/widgets/url_text/customUrlText.dart';
-import 'package:flutter_twitter_clone/widgets/newWidget/title_text.dart';
+import 'package:routy/helper/constant.dart';
+import 'package:routy/helper/utility.dart';
+import 'package:routy/model/feedModel.dart';
+import 'package:routy/model/user.dart';
+import 'package:routy/ui/page/feed/composePost/state/composeTweetState.dart';
+import 'package:routy/ui/page/feed/composePost/widget/composeBottomIconWidget.dart';
+import 'package:routy/ui/page/feed/composePost/widget/composeTweetImage.dart';
+import 'package:routy/ui/page/feed/composePost/widget/widgetView.dart';
+import 'package:routy/state/authState.dart';
+import 'package:routy/state/feedState.dart';
+import 'package:routy/state/searchState.dart';
+import 'package:routy/ui/page/profile/widgets/circular_image.dart';
+import 'package:routy/ui/theme/theme.dart';
+import 'package:routy/widgets/customAppBar.dart';
+import 'package:routy/widgets/customWidgets.dart';
+import 'package:routy/widgets/url_text/customUrlText.dart';
+import 'package:routy/widgets/newWidget/title_text.dart';
+import 'package:google_place/google_place.dart';
 import 'package:provider/provider.dart';
 
-class ComposeTweetPage extends StatefulWidget {
-  ComposeTweetPage({Key key, this.isRetweet, this.isTweet = true})
+class ComposePostPage extends StatefulWidget {
+  ComposePostPage({Key key, this.isRetweet, this.isTweet = true})
       : super(key: key);
 
   final bool isRetweet;
@@ -29,7 +30,7 @@ class ComposeTweetPage extends StatefulWidget {
   _ComposeTweetReplyPageState createState() => _ComposeTweetReplyPageState();
 }
 
-class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
+class _ComposeTweetReplyPageState extends State<ComposePostPage> {
   bool isScrollingDown = false;
   FeedModel model;
   ScrollController scrollcontroller;
@@ -78,6 +79,11 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
   void _onImageIconSelcted(File file) {
     setState(() {
       _image = file;
+    });
+  }
+  void _setRoute(DetailsResult result) {
+    setState(() {
+
     });
   }
 
@@ -200,9 +206,9 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
         onActionPressed: _submitButton,
         isCrossButton: true,
         submitButtonText: widget.isTweet
-            ? 'Tweet'
+            ? 'Post'
             : widget.isRetweet
-                ? 'Retweet'
+                ? 'Repost'
                 : 'Reply',
         isSubmitDisable:
             !Provider.of<ComposeTweetState>(context).enableSubmitButton ||
@@ -224,6 +230,7 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
               child: ComposeBottomIconWidget(
                 textEditingController: _textEditingController,
                 onImageIconSelcted: _onImageIconSelcted,
+                setRoute: _setRoute,
               ),
             ),
           ],
@@ -234,7 +241,7 @@ class _ComposeTweetReplyPageState extends State<ComposeTweetPage> {
 }
 
 class _ComposeRetweet
-    extends WidgetView<ComposeTweetPage, _ComposeTweetReplyPageState> {
+    extends WidgetView<ComposePostPage, _ComposeTweetReplyPageState> {
   _ComposeRetweet(this.viewState) : super(viewState);
 
   final _ComposeTweetReplyPageState viewState;
@@ -273,7 +280,7 @@ class _ComposeRetweet
                       ? customIcon(
                           context,
                           icon: AppIcon.blueTick,
-                          istwitterIcon: true,
+                          iscustomIcon: true,
                           iconColor: AppColor.primary,
                           size: 13,
                           paddingIcon: 3,
@@ -377,7 +384,7 @@ class _ComposeRetweet
 }
 
 class _ComposeTweet
-    extends WidgetView<ComposeTweetPage, _ComposeTweetReplyPageState> {
+    extends WidgetView<ComposePostPage, _ComposeTweetReplyPageState> {
   _ComposeTweet(this.viewState) : super(viewState);
 
   final _ComposeTweetReplyPageState viewState;
@@ -424,7 +431,7 @@ class _ComposeTweet
                     text:
                         'Replying to ${viewState.model.user.userName ?? viewState.model.user.displayName}',
                     style: TextStyle(
-                      color: TwitterColor.paleSky,
+                      color: RoutyColor.paleSky,
                       fontSize: 13,
                     ),
                   ),
@@ -451,7 +458,7 @@ class _ComposeTweet
                     ? customIcon(
                         context,
                         icon: AppIcon.blueTick,
-                        istwitterIcon: true,
+                        iscustomIcon: true,
                         iconColor: AppColor.primary,
                         size: 13,
                         paddingIcon: 3,
@@ -550,7 +557,7 @@ class _TextField extends StatelessWidget {
                   ? 'What\'s happening?'
                   : isRetweet
                       ? 'Add a comment'
-                      : 'Tweet your reply',
+                      : 'Post your reply',
               hintStyle: TextStyle(fontSize: 18)),
         ),
       ],
@@ -573,7 +580,7 @@ class _UserList extends StatelessWidget {
         ? SizedBox.shrink()
         : Container(
             padding: EdgeInsetsDirectional.only(bottom: 50),
-            color: TwitterColor.white,
+            color: RoutyColor.white,
             constraints:
                 BoxConstraints(minHeight: 30, maxHeight: double.infinity),
             child: ListView.builder(
@@ -625,7 +632,7 @@ class _UserTile extends StatelessWidget {
               ? customIcon(
                   context,
                   icon: AppIcon.blueTick,
-                  istwitterIcon: true,
+                  iscustomIcon: true,
                   iconColor: AppColor.primary,
                   size: 13,
                   paddingIcon: 3,
