@@ -78,7 +78,7 @@ class PostBottomSheet {
       FeedModel model,
       PostType type,
       GlobalKey<ScaffoldState> scaffoldKey}) {
-    return Column(
+    return Text("Deneme");/*Column(
       children: <Widget>[
         Container(
           width: context.width * .1,
@@ -91,7 +91,7 @@ class PostBottomSheet {
           ),
         ),
         _widgetBottomSheetRow(context, AppIcon.link,
-            text: 'Copy link to post', isEnable: true, onPressed: () async {
+            text: 'Kopyala', isEnable: true, onPressed: () async {
           Navigator.pop(context);
           var uri = await Utility.createLinkToShare(
             context,
@@ -201,7 +201,7 @@ class PostBottomSheet {
                 text: 'Report Post',
               ),
       ],
-    );
+    );*/
   }
 
   Widget _tweetOptions(BuildContext context,
@@ -221,7 +221,7 @@ class PostBottomSheet {
             ),
           ),
         ),
-        _widgetBottomSheetRow(context, AppIcon.link,
+       /* _widgetBottomSheetRow(context, AppIcon.link,
             text: 'Copy link to Post', isEnable: true, onPressed: () async {
           var uri = await Utility.createLinkToShare(
             context,
@@ -239,7 +239,7 @@ class PostBottomSheet {
               scaffoldKey: scaffoldKey,
               text: uri.toString(),
               message: "Tweet link copy to clipboard");
-        }),
+        }),*/
         isMyTweet
             ? _widgetBottomSheetRow(
                 context,
@@ -427,7 +427,7 @@ class PostBottomSheet {
           context,
           AppIcon.retweet,
           isEnable: true,
-          text: 'Repost',
+          text: 'Paylaş',
           onPressed: () async {
             var state = Provider.of<FeedState>(context, listen: false);
             var authState = Provider.of<AuthState>(context, listen: false);
@@ -458,7 +458,7 @@ class PostBottomSheet {
         _widgetBottomSheetRow(
           context,
           AppIcon.edit,
-          text: 'Retweet with comment',
+          text: 'Yorum yap',
           isEnable: true,
           onPressed: () {
             var state = Provider.of<FeedState>(context, listen: false);
@@ -519,7 +519,7 @@ class PostBottomSheet {
           context,
           AppIcon.link,
           isEnable: true,
-          text: 'Share Link',
+          text: 'Paylaş',
           onPressed: () async {
             Navigator.pop(context);
             var url = Utility.createLinkToShare(
@@ -534,7 +534,7 @@ class PostBottomSheet {
         _widgetBottomSheetRow(
           context,
           AppIcon.image,
-          text: 'Share with Tweet thumbnail',
+          text: 'Paylaş',
           isEnable: true,
           onPressed: () {
             socialMetaTagParameters = SocialMetaTagParameters(

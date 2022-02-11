@@ -20,10 +20,10 @@ class SettingsAndPrivacyPage extends StatelessWidget {
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
-          'Settings and privacy',
+          'Ayarlar',
         ),
       ),
-      body: ListView(
+      body:Text("yakında") /*ListView(
         children: <Widget>[
           HeaderWidget(user.userName),
           SettingRowWidget(
@@ -57,7 +57,7 @@ class SettingsAndPrivacyPage extends StatelessWidget {
                 'These settings affect all of your Fwitter accounts on this devce.',
           )
         ],
-      ),
+      ),*/
     );
   }
 }

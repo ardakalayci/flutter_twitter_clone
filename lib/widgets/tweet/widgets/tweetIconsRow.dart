@@ -136,7 +136,7 @@ class TweetIconsRow extends StatelessWidget {
             customText(Utility.getPostTime2(model.createdAt),
                 style: TextStyles.textStyle14),
             SizedBox(width: 10),
-            customText('Routy for Android',
+            customText('',
                 style: TextStyle(color: Theme.of(context).primaryColor))
           ],
         ),
@@ -200,7 +200,7 @@ class TweetIconsRow extends StatelessWidget {
                                   key: ValueKey(model.likeCount)),
                             ),
                             SizedBox(width: 5),
-                            customText('Likes', style: TextStyles.subtitleStyle)
+                            customText('Beğeni', style: TextStyles.subtitleStyle)
                           ],
                         ),
                         crossFadeState: !isLikeAvailable

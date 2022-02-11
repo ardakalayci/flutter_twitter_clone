@@ -28,7 +28,7 @@ class FollowNotificationTile extends StatelessWidget {
                     model.user.displayName,
                     style: TextStyles.titleStyle.copyWith(fontSize: 14),
                   ),
-                  Text(" Followed you", style: TextStyles.subtitleStyle),
+                  Text(" Takip etti", style: TextStyles.subtitleStyle),
                 ],
               ),
               SizedBox(width: 10),

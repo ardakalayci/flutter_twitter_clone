@@ -19,7 +19,7 @@ class NotificationPage extends StatelessWidget {
         title: 'Bildirimler',
         subtitle: user.userName,
       ),
-      body: ListView(
+      body:Text("yakında") /*ListView(
         children: <Widget>[
           HeaderWidget('Filters'),
           SettingRowWidget(
@@ -49,7 +49,7 @@ class NotificationPage extends StatelessWidget {
             subtitle: 'Control when how often Fwitter sends emails to you.',
           ),
         ],
-      ),
+      ),*/
     );
   }
 }

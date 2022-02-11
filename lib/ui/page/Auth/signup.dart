@@ -57,13 +57,13 @@ class _SignupState extends State<Signup> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            _entryFeild('Name', controller: _nameController),
-            _entryFeild('Enter email',
+            _entryFeild('İsim', controller: _nameController),
+            _entryFeild('E-mail',
                 controller: _emailController, isEmail: true),
             // _entryFeild('Mobile no',controller: _mobileController),
-            _entryFeild('Enter password',
+            _entryFeild('Şifre',
                 controller: _passwordController, isPassword: true),
-            _entryFeild('Confirm password',
+            _entryFeild('Tekrar Şifre',
                 controller: _confirmController, isPassword: true),
             _submitButton(context),
 
@@ -140,11 +140,11 @@ class _SignupState extends State<Signup> {
         _passwordController.text == null ||
         _passwordController.text.isEmpty ||
         _confirmController.text == null) {
-      Utility.customSnackBar(_scaffoldKey, 'Please fill form carefully');
+      Utility.customSnackBar(_scaffoldKey, 'Alanları kontrol ediniz');
       return;
     } else if (_passwordController.text != _confirmController.text) {
       Utility.customSnackBar(
-          _scaffoldKey, 'Password and confirm password did not match');
+          _scaffoldKey, 'Şifreler uyuşmuyor');
       return;
     }
 
@@ -160,7 +160,7 @@ class _SignupState extends State<Signup> {
       displayName: _nameController.text,
       dob: DateTime(1950, DateTime.now().month, DateTime.now().day + 3)
           .toString(),
-      location: 'Somewhere in universe',
+      location: 'Güzel ülkemin biryerlerinde',
       profilePic: Constants.dummyProfilePicList[randomNumber],
       isVerified: false,
     );

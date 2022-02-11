@@ -90,9 +90,9 @@ class TrendsPage extends StatelessWidget {
       backgroundColor: RoutyColor.white,
       appBar: CustomAppBar(
         isBackButton: true,
-        title: customTitleText('Trends'),
+        title: customTitleText('Arama ayarı'),
       ),
-      body: ListView(
+      body:Text("yakında") /*ListView(
         physics: BouncingScrollPhysics(),
         children: <Widget>[
           SettingRowWidget(
@@ -119,7 +119,7 @@ class TrendsPage extends StatelessWidget {
             vPadding: 12,
           ),
         ],
-      ),
+      ),*/
     );
   }
 }

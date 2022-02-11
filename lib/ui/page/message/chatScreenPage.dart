@@ -196,7 +196,7 @@ class _ChatScreenPageState extends State<ChatScreenPage> {
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 10, vertical: 13),
               alignLabelWithHint: true,
-              hintText: 'Start with a message...',
+              hintText: 'Mesajlaşmaya başla',
               suffixIcon:
                   IconButton(icon: Icon(Icons.send), onPressed: submitMessage),
               // fillColor: Colors.black12, filled: true

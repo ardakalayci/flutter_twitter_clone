@@ -57,7 +57,7 @@ class PostLikeTile extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 60, bottom: 5, top: 5),
           child: TitleText(
-            '$length people like your Post',
+            '$length kişi beğendi',
             fontSize: 18,
             color: Colors.black87,
             fontWeight: FontWeight.w500,

@@ -346,7 +346,7 @@ class _ProfilePageState extends State<ProfilePage>
       onWillPop: _onWillPop,
       child: Scaffold(
         key: scaffoldKey,
-        floatingActionButton: !isMyProfile ? null : _floatingActionButton(),
+        //floatingActionButton: !isMyProfile ? null : _floatingActionButton(),
         backgroundColor: RoutyColor.mystic,
         body: NestedScrollView(
           // controller: _scrollController,
@@ -448,11 +448,11 @@ class _ProfilePageState extends State<ProfilePage>
                 padding: EdgeInsets.only(top: 50, left: 30, right: 30),
                 child: NotifyText(
                   title: isMyProfile
-                      ? 'You haven\'t ${isreply ? 'reply to any Post' : isMedia ? 'post any media Post yet' : 'post any Tweet yet'}'
+                      ? 'Hiç ${isreply ? 'rota' : isMedia ? 'lokasyon' : 'paylaşım'} yok'
                       : '${authstate.profileUserModel.userName} hasn\'t ${isreply ? 'reply to any Post' : isMedia ? 'post any media Tweet yet' : 'post any Tweet yet'}',
                   subTitle: isMyProfile
-                      ? 'Tap tweet button to add new'
-                      : 'Once he\'ll do, they will be shown up here',
+                      ? 'Yeni oluştur'
+                      : 'deneme',
                 ),
               )
 

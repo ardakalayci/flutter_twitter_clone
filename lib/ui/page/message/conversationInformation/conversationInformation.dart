@@ -79,10 +79,10 @@ class ConversationInformation extends StatelessWidget {
       appBar: CustomAppBar(
         isBackButton: true,
         title: customTitleText(
-          'Conversation information',
+          'Bildir',
         ),
       ),
-      body: ListView(
+      body: Text("yakında"),/*ListView(
         children: <Widget>[
           _header(context, user),
           HeaderWidget('Notifications'),
@@ -104,7 +104,7 @@ class ConversationInformation extends StatelessWidget {
           SettingRowWidget("Delete conversation",
               textColor: RoutyColor.ceriseRed, showDivider: false),
         ],
-      ),
+      ),*/
     );
   }
 }

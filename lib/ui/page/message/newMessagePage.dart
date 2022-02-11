@@ -76,7 +76,7 @@ class _NewMessagePageState extends State<NewMessagePage> {
           isBackButton: true,
           isbootomLine: true,
           title: customTitleText(
-            'New Message',
+            'Yeni Mesaj',
           ),
         ),
         body: Consumer<SearchState>(

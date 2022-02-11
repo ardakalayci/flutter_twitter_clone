@@ -37,7 +37,7 @@ class UnavailablePost extends StatelessWidget {
                 ),
               ),
             )
-          : Text('This Tweet is unavailable', style: TextStyles.userNameStyle),
+          : Text('Bulamadık', style: TextStyles.userNameStyle),
     );
   }
 }

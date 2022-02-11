@@ -17,12 +17,12 @@ class ProfileImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     const List<Choice> choices = const <Choice>[
       const Choice(
-          title: 'Share image link', icon: Icons.share, isEnable: true),
+          title: 'Paylaş', icon: Icons.share, isEnable: true),
       const Choice(
-          title: 'Open in browser',
+          title: 'Aç',
           icon: Icons.open_in_browser,
           isEnable: true),
-      const Choice(title: 'Save', icon: Icons.save),
+      const Choice(title: 'Kaydet', icon: Icons.save),
     ];
     // var authstate = Provider.of<AuthState>(context, listen: false);
     return Scaffold(
@@ -32,13 +32,13 @@ class ProfileImageView extends StatelessWidget {
           PopupMenuButton<Choice>(
             onSelected: (d) {
               switch (d.title) {
-                case "Share image link":
+                case "Paylaş":
                   Utility.share(avatar);
                   break;
-                case "Open in browser":
+                case "Aç":
                   Utility.launchURL(avatar);
                   break;
-                case "Save":
+                case "Kaydet":
                   break;
               }
             },

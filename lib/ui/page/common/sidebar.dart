@@ -201,10 +201,10 @@ class _SidebarMenuState extends State<SidebarMenu> {
               Spacer(),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
+                 /* Navigator.push(
                       context,
                       ScanScreen.getRoute(
-                          context.read<AuthState>().profileUserModel));
+                          context.read<AuthState>().profileUserModel));*/
                 },
                 child: Image.asset(
                   "assets/images/qr.png",

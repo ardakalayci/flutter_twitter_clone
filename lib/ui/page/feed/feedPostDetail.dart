@@ -94,7 +94,7 @@ class _FeedPostDetailState extends State<FeedPostDetail> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        floatingActionButton: _floatingActionButton(),
+        //floatingActionButton: _floatingActionButton(),
         backgroundColor: Theme.of(context).backgroundColor,
         body: CustomScrollView(
           slivers: <Widget>[

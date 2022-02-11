@@ -134,7 +134,7 @@ class UserTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
-                  isFollow ? 'Following' : 'Follow',
+                  isFollow ? 'Takip ediliyor' : 'Takip et',
                   style: TextStyle(
                     color: isFollow ? RoutyColor.white : Colors.blue,
                     fontSize: 12,

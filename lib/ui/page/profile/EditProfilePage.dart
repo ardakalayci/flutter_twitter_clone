@@ -68,12 +68,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ],
           ),
         ),
-        _entry('Name', controller: _name),
-        _entry('Bio', controller: _bio, maxLine: null),
-        _entry('Location', controller: _location),
+        _entry('İsim', controller: _name),
+        _entry('Açıklama', controller: _bio, maxLine: null),
+        _entry('Lokasyon', controller: _location),
         InkWell(
           onTap: showCalender,
-          child: _entry('Date of birth', isenable: false, controller: _dob),
+          child: _entry('Doğum tarihin', isenable: false, controller: _dob),
         )
       ],
     );
@@ -306,13 +306,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue),
-        title: customTitleText('Profile Edit'),
+        title: customTitleText('Profil düzenle'),
         actions: <Widget>[
           InkWell(
             onTap: _submitButton,
             child: Center(
               child: Text(
-                'Save',
+                'Güncelle',
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 17,

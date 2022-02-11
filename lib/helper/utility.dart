@@ -62,7 +62,7 @@ class Utility {
     }
     var dt = DateTime.parse(date).toLocal();
     var dat = DateFormat("MMMM yyyy").format(dt);
-    return 'Joined $dat';
+    return 'kayıt olma tarihi $dat';
   }
 
   static String getChatTime(String date) {
@@ -78,16 +78,16 @@ class Utility {
 
     var dur = DateTime.now().toLocal().difference(dt);
     if (dur.inDays > 0) {
-      msg = '${dur.inDays} d';
+      msg = '${dur.inDays} gün';
       return dur.inDays == 1 ? '1d' : DateFormat("dd MMM").format(dt);
     } else if (dur.inHours > 0) {
-      msg = '${dur.inHours} h';
+      msg = '${dur.inHours} saat';
     } else if (dur.inMinutes > 0) {
-      msg = '${dur.inMinutes} m';
+      msg = '${dur.inMinutes} dk';
     } else if (dur.inSeconds > 0) {
-      msg = '${dur.inSeconds} s';
+      msg = '${dur.inSeconds} sn';
     } else {
-      msg = 'now';
+      msg = 'şimdi';
     }
     return msg;
   }
@@ -190,19 +190,19 @@ class Utility {
   static bool validateCredentials(
       GlobalKey<ScaffoldState> _scaffoldKey, String email, String password) {
     if (email == null || email.isEmpty) {
-      customSnackBar(_scaffoldKey, 'Please enter email id');
+      customSnackBar(_scaffoldKey, 'Mail giriniz');
       return false;
     } else if (password == null || password.isEmpty) {
-      customSnackBar(_scaffoldKey, 'Please enter password');
+      customSnackBar(_scaffoldKey, 'Şifrenizi Gİrin');
       return false;
     } else if (password.length < 8) {
-      customSnackBar(_scaffoldKey, 'Password must me 8 character long');
+      customSnackBar(_scaffoldKey, 'Şifre 8 karakterden uzun olmalı');
       return false;
     }
 
     var status = validateEmal(email);
     if (!status) {
-      customSnackBar(_scaffoldKey, 'Please enter valid email id');
+      customSnackBar(_scaffoldKey, 'Mail adresinizi giriniz');
       return false;
     }
     return true;
@@ -239,10 +239,10 @@ class Utility {
   static Future<Uri> createLinkToShare(BuildContext context, String id,
       {SocialMetaTagParameters socialMetaTagParameters}) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
-        uriPrefix: 'https://fwitterdev.page.link',
-        link: Uri.parse('https://twitter.com/$id'),
+        uriPrefix: 'https://routy.page.link',
+        link: Uri.parse('https://routy.com/$id'),
         androidParameters: AndroidParameters(
-          packageName: 'com.thealphamerc.flutter_twitter_clone_dev',
+          packageName: 'com.routy.routy',
           minimumVersion: 0,
         ),
         dynamicLinkParametersOptions: DynamicLinkParametersOptions(

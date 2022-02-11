@@ -38,7 +38,7 @@ class FeedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _floatingActionButton(context),
+      //floatingActionButton: _floatingActionButton(context),
       backgroundColor: RoutyColor.mystic,
       body: SafeArea(
         child: Container(

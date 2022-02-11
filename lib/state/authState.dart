@@ -277,7 +277,7 @@ class AuthState extends AppState {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email).then((value) {
         Utility.customSnackBar(scaffoldKey,
-            'A reset password link is sent yo your mail.You can reset your password from there');
+            'Mail adresinize gönderildi');
         Utility.logEvent('forgot+password');
       }).catchError((error) {
         cprint(error.message);

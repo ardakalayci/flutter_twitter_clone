@@ -167,7 +167,7 @@ class _ChatListPageState extends State<ChatListPage> {
         icon: AppIcon.settings,
         onActionPressed: onSettingIconPressed,
       ),
-      floatingActionButton: _newMessageButton(),
+      //floatingActionButton: _newMessageButton(),
       backgroundColor: RoutyColor.mystic,
       body: _body(),
     );

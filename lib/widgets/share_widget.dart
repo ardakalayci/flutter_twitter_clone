@@ -79,7 +79,7 @@ class _MyHomePageState extends State<ShareWidget> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Share'),
+        title: new Text('Paylaş'),
       ),
       body: SingleChildScrollView(
         child: new Column(
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<ShareWidget> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: CustomFlatButton(
-                label: "Share",
+                label: "Paylaş",
                 onPressed: _capturePng,
                 isLoading: isLoading,
                 labelStyle: TextStyle(

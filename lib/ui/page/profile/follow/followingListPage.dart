@@ -9,7 +9,7 @@ class FollowingListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var state = Provider.of<AuthState>(context);
     return UsersListPage(
-        pageTitle: 'Following',
+        pageTitle: 'Takip ediliyor',
         userIdsList: state.profileUserModel.followingList,
         appBarIcon: AppIcon.follow,
         emptyScreenText:

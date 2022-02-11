@@ -46,12 +46,12 @@ class _SignInState extends State<SignIn> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 150),
-            _entryFeild('Enter email', controller: _emailController),
-            _entryFeild('Enter password',
+            _entryFeild('Mail adresinizi giriniz', controller: _emailController),
+            _entryFeild('Şifrenizi Giriniz',
                 controller: _passwordController, isPassword: true),
             _emailLoginButton(context),
             SizedBox(height: 20),
-            _labelButton('Forget password?', onPressed: () {
+            _labelButton('Şiferni Unuttun', onPressed: () {
               Navigator.of(context).pushNamed('/ForgetPasswordPage');
             }),
             Divider(

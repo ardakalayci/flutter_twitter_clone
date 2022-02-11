@@ -82,54 +82,108 @@ class Post extends StatelessWidget {
                 onTap: () {
                   onTapTweet(context);
                 },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(
-                        top: type == PostType.Post || type == PostType.Reply ? 12 : 0,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: type == PostType.Post || type == PostType.Reply ? 12 : 0,
+                        ),
+                        child: type == PostType.Post || type == PostType.Reply
+                            ? _TweetBody(
+                                isDisplayOnProfile: isDisplayOnProfile,
+                                model: model,
+                                trailing: trailing,
+                                type: type,
+                              )
+                            : _TweetDetailBody(
+                                isDisplayOnProfile: isDisplayOnProfile,
+                                model: model,
+                                trailing: trailing,
+                                type: type,
+                              ),
                       ),
-                      child: type == PostType.Post || type == PostType.Reply
-                          ? _TweetBody(
-                              isDisplayOnProfile: isDisplayOnProfile,
-                              model: model,
-                              trailing: trailing,
+                      Padding(
+                        padding: EdgeInsets.only(right: 16),
+                        child: PostImage(
+                          model: model,
+                          type: type,
+                        ),
+                      ),
+                      model.childRetwetkey == null
+                          ? SizedBox.shrink()
+                          : RetweetWidget(
+                              childRetwetkey: model.childRetwetkey,
                               type: type,
-                            )
-                          : _TweetDetailBody(
-                              isDisplayOnProfile: isDisplayOnProfile,
-                              model: model,
-                              trailing: trailing,
-                              type: type,
+                              isImageAvailable: model.imagePath != null && model.imagePath.isNotEmpty,
                             ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 16),
-                      child: PostImage(
-                        model: model,
-                        type: type,
+                      type == PostType.Post || type == PostType.Reply
+                          ? Container()
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Text(
+                                    "1. The Colosseum and its murderous games",
+                                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Image.network("https://www.voyagetips.com/wp-content/uploads/2017/05/colisee-rome-840x486.jpg"),
+                                  ),
+                                  Text(
+                                    "The visit isn’t free and you will probably have to wait for a few hours before getting there if you are going in high season.",
+                                    style: TextStyle(fontWeight: FontWeight.w600),
+                                  ),
+                                  Divider(height: 40,),
+                                  Text(
+                                    "2. The Roman Forum",
+                                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Image.network("https://www.voyagetips.com/wp-content/uploads/2017/05/forum-romain-rome-840x630.jpg"),
+                                  ),
+                                  Text(
+                                    "The ticket purchased at the Colosseum also includes access to the Roman Forum and the Palatine Hill (I will talk about it just below), so it would be a shame to miss them, as the 3 touristic sites are linked together.",
+                                    style: TextStyle(fontWeight: FontWeight.w600),
+                                  ),
+                                  Divider(height: 40,),
+                                  Text(
+                                    "3. The Palatine Hill",
+                                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Image.network("https://www.voyagetips.com/wp-content/uploads/2017/05/mont-palatin-rome-840x473.jpg"),
+                                  ),
+                                  Text(
+                                    "Palatine Hill, one of the 7 hills of Rome, is according to mythology the place where the city was founded by Romulus and Remus. As you might know, they are the two twins who would have been found and suckled by a wolf in a cave.",
+                                    style: TextStyle(fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                            ),
+                      Padding(
+                        padding: EdgeInsets.only(left: type == PostType.Detail ? 10 : 60),
+                        child: TweetIconsRow(
+                          type: type,
+                          model: model,
+                          isTweetDetail: type == PostType.Detail,
+                          iconColor: Theme.of(context).textTheme.caption.color,
+                          iconEnableColor: RoutyColor.ceriseRed,
+                          size: 20,
+                        ),
                       ),
-                    ),
-                    model.childRetwetkey == null
-                        ? SizedBox.shrink()
-                        : RetweetWidget(
-                            childRetwetkey: model.childRetwetkey,
-                            type: type,
-                            isImageAvailable: model.imagePath != null && model.imagePath.isNotEmpty,
-                          ),
-                    Padding(
-                      padding: EdgeInsets.only(left: type == PostType.Detail ? 10 : 60),
-                      child: TweetIconsRow(
-                        type: type,
-                        model: model,
-                        isTweetDetail: type == PostType.Detail,
-                        iconColor: Theme.of(context).textTheme.caption.color,
-                        iconEnableColor: RoutyColor.ceriseRed,
-                        size: 20,
-                      ),
-                    ),
-                    type == PostType.ParentPost ? SizedBox.shrink() : Divider(height: .5, thickness: .5)
-                  ],
+                      type == PostType.ParentPost ? SizedBox.shrink() : Divider(height: .5, thickness: .5)
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -400,7 +454,6 @@ class _TweetBodyRoute extends StatelessWidget {
                   : Container(
                       height: MediaQuery.of(context).size.height * .37,
                       child: ListView.builder(
-
                           scrollDirection: Axis.horizontal,
                           itemCount: model.route_map.length,
                           itemBuilder: (context, index) {
@@ -419,26 +472,31 @@ class _TweetBodyRoute extends StatelessWidget {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(4.0),
-                                            child: Text((index+1).toString()+". "+model.route_map[index]["name"],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                                            child: Text(
+                                              (index + 1).toString() + ". " + model.route_map[index]["name"],
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                                            ),
                                           ),
-
                                           Container(
-                                            height: MediaQuery.of(context).size.height*.25,
-                                            width: MediaQuery.of(context).size.height*.25,
-                                            child: Image.network(model.route_map[index]["image"],fit: BoxFit.cover,),
+                                            height: MediaQuery.of(context).size.height * .25,
+                                            width: MediaQuery.of(context).size.height * .25,
+                                            child: Image.network(
+                                              model.route_map[index]["image"],
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
                                     Container(
-                                      width: MediaQuery.of(context).size.height*.25,
-
+                                      width: MediaQuery.of(context).size.height * .25,
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(model.route_map[index]["description"].toString().length >90 ?model.route_map[index]["description"].toString().substring(0,100)+"...":model.route_map[index]["description"].toString()+"..."),
+                                        child: Text(model.route_map[index]["description"].toString().length > 90
+                                            ? model.route_map[index]["description"].toString().substring(0, 100) + "..."
+                                            : model.route_map[index]["description"].toString() + "..."),
                                       ),
                                     )
-
                                   ],
                                 ),
                                 Icon(Icons.arrow_right_alt)

@@ -157,7 +157,7 @@ class _ComposeTweetReplyPageState extends State<ComposePostPage> {
       kScreenloader.hideLoader();
 
       /// Navigate back to home page
-      Navigator.pop(context);
+      //Navigator.pop(context);
     });
   }
 
@@ -206,10 +206,10 @@ class _ComposeTweetReplyPageState extends State<ComposePostPage> {
         onActionPressed: _submitButton,
         isCrossButton: true,
         submitButtonText: widget.isTweet
-            ? 'Post'
+            ? 'Gönder'
             : widget.isRetweet
-                ? 'Repost'
-                : 'Reply',
+                ? 'Paylaş'
+                : 'Yanıtla',
         isSubmitDisable:
             !Provider.of<ComposeTweetState>(context).enableSubmitButton ||
                 Provider.of<FeedState>(context).isBusy,
@@ -429,7 +429,7 @@ class _ComposeTweet
                   SizedBox(height: 30),
                   UrlText(
                     text:
-                        'Replying to ${viewState.model.user.userName ?? viewState.model.user.displayName}',
+                        'Cevap ${viewState.model.user.userName ?? viewState.model.user.displayName}',
                     style: TextStyle(
                       color: RoutyColor.paleSky,
                       fontSize: 13,
@@ -554,10 +554,10 @@ class _TextField extends StatelessWidget {
           decoration: InputDecoration(
               border: InputBorder.none,
               hintText: isTweet
-                  ? 'What\'s happening?'
+                  ? 'Bahset?'
                   : isRetweet
-                      ? 'Add a comment'
-                      : 'Post your reply',
+                      ? 'Yorum yap'
+                      : 'Cevap Ver',
               hintStyle: TextStyle(fontSize: 18)),
         ),
       ],
