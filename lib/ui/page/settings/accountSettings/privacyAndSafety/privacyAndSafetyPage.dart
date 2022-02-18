@@ -117,7 +117,7 @@ class PrivacyAndSaftyPage extends StatelessWidget {
             subtitle: "Allow all",
           ),
           SettingRowWidget(
-            "See your Fwitter data",
+            "See your routy data",
             subtitle:
                 "Review and edit your profile information and data associated with your account.",
           ),

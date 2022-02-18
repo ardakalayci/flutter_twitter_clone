@@ -27,7 +27,7 @@ class FeedPage extends StatelessWidget {
       },
       child: customIcon(
         context,
-        icon: Icons.alt_route,
+        icon: Icons.add,
         iscustomIcon: false,
         iconColor: Theme.of(context).colorScheme.onPrimary,
         size: 25,
@@ -38,7 +38,7 @@ class FeedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //floatingActionButton: _floatingActionButton(context),
+      floatingActionButton: _floatingActionButton(context),
       backgroundColor: RoutyColor.mystic,
       body: SafeArea(
         child: Container(
@@ -94,9 +94,9 @@ class _FeedPageBody extends StatelessWidget {
                 : !state.isBusy && list == null
                     ? SliverToBoxAdapter(
                         child: EmptyList(
-                          'No Tweet added yet',
+                          'No Post added yet',
                           subTitle:
-                              'When new Tweet added, they\'ll show up here \n Tap tweet button to add new',
+                              'When new Post added, they\'ll show up here \n Tap post button to add new',
                         ),
                       )
                     : SliverList(

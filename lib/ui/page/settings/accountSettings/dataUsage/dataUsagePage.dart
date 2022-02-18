@@ -124,14 +124,14 @@ class DataUsagePage extends StatelessWidget {
             vPadding: 15,
             showDivider: false,
             subtitle:
-                'When enabled, video won\'t autoplay and lower-quality images load. This automatically reduces your data usage for all Fwitter accounts on this device.',
+                'Etkinleştirildiğinde, video otomatik olarak oynatılmaz ve daha düşük kaliteli görüntüler yüklenir. Bu, bu cihazdaki tüm Routy hesapları için veri kullanımınızı otomatik olarak azaltır.',
           ),
           Divider(height: 0),
           HeaderWidget('Images'),
           SettingRowWidget(
-            "High quality images",
+            "Yüksek kaliteli görüntüler",
             subtitle:
-                'Mobile data & Wi-Fi \n\nSelect when high quality images should load.',
+                'Mobil veri ve Wi-Fi \n\nYüksek kaliteli resimlerin ne zaman yükleneceğini seçin.',
             vPadding: 15,
             onPressed: () {
               openDarkModeSettings(context);

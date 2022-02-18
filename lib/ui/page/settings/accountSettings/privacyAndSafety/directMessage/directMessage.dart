@@ -33,7 +33,7 @@ class DirectMessagesPage extends StatelessWidget {
             visibleSwitch: true,
             vPadding: 20,
             subtitle:
-                'You will be able to receive Direct Message requests from anyone on Fwitter, even if you don\'t follow them.',
+                "Routy'deki herkesten, onları takip etmeseniz bile Direkt Mesaj istekleri alabileceksiniz.",
           ),
           SettingRowWidget(
             "Show read receipts",
@@ -41,7 +41,7 @@ class DirectMessagesPage extends StatelessWidget {
             showDivider: false,
             visibleSwitch: true,
             subtitle:
-                'When someone sends you a message, people in the conversation will know you\'ve seen it. If you turn off this setting, you won\'t be able to see read receipt from others.',
+                'Biri size bir mesaj gönderdiğinde, görüşmedeki kişiler onu gördüğünüzü bilecek. Bu ayarı kapatırsanız, diğerlerinden okundu bilgisi göremezsiniz.',
           ),
         ],
       ),

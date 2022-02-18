@@ -41,10 +41,12 @@ class _ChatListPageState extends State<ChatListPage> {
     if (state.chatUserList == null) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 30),
-        child: EmptyList(
-          'Mesaj yok ',
-          subTitle:
-              'Yeni mesaj göndermek için butonu kullan',
+        child: Center(
+          child: EmptyList(
+            'Mesaj yok ',
+            subTitle:
+                'Yeni mesaj göndermek için butonu kullan',
+          ),
         ),
       );
     } else {

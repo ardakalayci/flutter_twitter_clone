@@ -43,11 +43,15 @@ class Routes {
 
   static void sendNavigationEventToFirebase(String path) {
     if (path != null && path.isNotEmpty) {
+      print(path);
+      print("-*-*-**--**--*");
       // analytics.setCurrentScreen(screenName: path);
     }
   }
 
   static Route onGenerateRoute(RouteSettings settings) {
+    print(settings.name);
+    print("-*-*-**--**--*");
     final List<String> pathElements = settings.name.split('/');
     if (pathElements[0] != '' || pathElements.length == 1) {
       return null;

@@ -91,7 +91,7 @@ class _ComposeTweetReplyPageState extends State<ComposePostPage> {
   void _submitButton() async {
     if (_textEditingController.text == null ||
         _textEditingController.text.isEmpty ||
-        _textEditingController.text.length > 280) {
+        _textEditingController.text.length > 28000) {
       return;
     }
     var state = Provider.of<FeedState>(context, listen: false);
@@ -155,10 +155,11 @@ class _ComposeTweetReplyPageState extends State<ComposePostPage> {
         .then((_) {
       /// Hide running loader on screen
       kScreenloader.hideLoader();
-
+      //Navigator.push(context, MaterialPageRoute(builder: (context)=>));
       /// Navigate back to home page
-      //Navigator.pop(context);
+      Navigator.pop(context);
     });
+
   }
 
   /// Return Tweet model which is either a new Tweet , retweet model or comment model
@@ -204,7 +205,8 @@ class _ComposeTweetReplyPageState extends State<ComposePostPage> {
       appBar: CustomAppBar(
         title: customTitleText(''),
         onActionPressed: _submitButton,
-        isCrossButton: true,
+        isCrossButton: false,
+        isBackButton: true,
         submitButtonText: widget.isTweet
             ? 'Gönder'
             : widget.isRetweet

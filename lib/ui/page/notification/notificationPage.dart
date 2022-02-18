@@ -96,9 +96,11 @@ class NotificationPageBody extends StatelessWidget {
     } else if (list == null || list.isEmpty) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 30),
-        child: EmptyList(
-          'No Notification available yet',
-          subTitle: 'When new notifiction found, they\'ll show up here.',
+        child: Center(
+          child: EmptyList(
+            'Henüz bir Bildirim yok',
+            subTitle: 'Yeni bildirim bulunduğunda burada görünürler.',
+          ),
         ),
       );
     }

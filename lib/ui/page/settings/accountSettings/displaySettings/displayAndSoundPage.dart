@@ -143,7 +143,7 @@ class DisplayAndSoundPage extends StatelessWidget {
           SettingRowWidget(
             "Emoji",
             subtitle:
-                'Use the Fwitter set instead of your device\'s default set',
+                'Use the Routy set instead of your device\'s default set',
             showDivider: false,
             showCheckBox: false,
           ),

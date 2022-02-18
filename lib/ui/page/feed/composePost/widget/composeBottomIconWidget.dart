@@ -65,15 +65,15 @@ class _ComposeBottomIconWidgetState extends State<ComposeBottomIconWidget> {
                 setImage(ImageSource.camera);
               },
               icon: customIcon(context, icon: AppIcon.camera, iscustomIcon: true, iconColor: AppColor.primary)),
-          Expanded(
+         /* Expanded(
             child: IconButton(
                 onPressed: () async {
                   var route = await Navigator.push(context, MaterialPageRoute(builder: (context) => RouteCreatePage()));
 
                 },
                 icon: customIcon(context, icon: FontAwesome5Solid.route, size: 20, iscustomIcon: true, iconColor: AppColor.primary)),
-          ),
-          Expanded(
+          ),*/
+          /*Expanded(
               child: Align(
             alignment: Alignment.centerRight,
             child: Padding(
@@ -96,7 +96,7 @@ class _ComposeBottomIconWidgetState extends State<ComposeBottomIconWidget> {
                               : customText('', style: TextStyle(color: wordCountColor))
                         ],
                       )),
-          ))
+          ))*/
         ],
       ),
     );
