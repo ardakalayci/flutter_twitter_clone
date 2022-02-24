@@ -78,11 +78,12 @@ flutter_app_name:
   # json_annotation: ^3.1.1
   # json_serializable: ^3.5.1
 
+
 flutter_icons:
   ios: true
   android: true
-  image_path_ios: "assets/images/icon-400.png"
-  image_path_android: "assets/images/icon-400.png"
+  image_path_ios: "assets/images/app-icon.jpeg"
+  image_path_android: "assets/images/app-icon.jpeg"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
